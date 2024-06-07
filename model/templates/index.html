@@ -1,0 +1,497 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Aplikasi Klasifikasi Kualitas Padi Organik</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assetss/img/favicon.png' %}" rel="icon" />
+    <link href="{% static 'assetss/img/logo.png' %}" rel="apple-touch-icon" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assetss/vendor/aos/aos.css' %}" rel="stylesheet" />
+    <link href="{% static 'assetss/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assetss/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'assetss/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assetss/vendor/remixicon/remixicon.css' %}" rel="stylesheet" />
+    <link href="{% static 'assetss/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assetss/css/style.css' %}" rel="stylesheet" />
+
+    <!-- =======================================================
+  * Template Name: FlexStart
+  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top">
+      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="{% static 'assetss/img/logo.png' %}" alt="" />
+          <span>SIKKPO</span>
+        </a>
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+            <li><a class="nav-link scrollto" href="#portfolio">About</a></li>
+            <li><a class="nav-link scrollto" href="#about">Klasifikasi</a></li>
+            <li><a class="nav-link scrollto" href="#services">Upload</a></li>
+            <li><a class="getstarted scrollto" href="{% url 'login' %}">Login</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="hero d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 d-flex flex-column justify-content-center">
+            <h1 data-aos="fade-up">Sistem Klasifikasi Kualitas Padi Organik</h1>
+            <!-- <h2 data-aos="fade-up" data-aos-delay="400">SIKKPO</h2> -->
+            <div data-aos="fade-up" data-aos-delay="600">
+              <div class="text-center text-lg-start">
+                <ul>
+                  <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                    <span>Mulai Klasifikasi</span>
+                    <i class="bi bi-arrow-right"></i>
+                  </a>
+                  <a href="{% url 'login' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                    <span>Login</span>
+                    <i class="bi bi-arrow-right"></i>
+                  </a>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+            <img src="{% static 'assetss/img/hero-img.png' %}" class="img-fluid" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Hero -->
+
+    <main id="main">
+      <!-- ======= Values Section ======= -->
+      <section id="values" class="values">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <p>Our Main Points</p>
+          </header>
+
+          <div class="row">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="box">
+                <img src="{% static 'assetss/img/values-1.png' %}" class="img-fluid" alt="" />
+                <h3>Min-Max Scaler</h3>
+                <p>Berikut ini deskripsi fungsi Min-Max Scaler</p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+              <div class="box">
+                <img src="{% static 'assetss/img/values-2.png' %}" class="img-fluid" alt="" />
+                <h3>SMOTE</h3>
+                <p>Berikut ini deskripsi fungsi SMOTE</p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
+              <div class="box">
+                <img src="{% static 'assetss/img/values-3.png' %}" class="img-fluid" alt="" />
+                <h3>C4.5</h3>
+                <p>Berikut ini deskripsi fungsi C4.5</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Values Section -->
+
+      <!-- ======= Features Section ======= -->
+      <section id="features" class="features">
+        <div class="container" data-aos="fade-up">
+
+          <!-- Feature Tabs -->
+          <div class="row feture-tabs" data-aos="fade-up">
+            <div class="col-lg-6">
+              <h3>Sistem Klasifikasi Kualitas Padi Organik</h3>
+
+              <!-- Tabs -->
+              <ul class="nav nav-pills mb-3">
+                <li>
+                  <a class="nav-link active" data-bs-toggle="pill" href="#tab1">Tentang Sistem</a>
+                </li>
+                <li>
+                  <a class="nav-link" data-bs-toggle="pill" href="#tab2">Fungsi</a>
+                </li>
+                <li>
+                  <a class="nav-link" data-bs-toggle="pill" href="#tab3">Tujuan</a>
+                </li>
+              </ul>
+              <!-- End Tabs -->
+
+              <!-- Tab Content -->
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab1">
+                  <p>Sistem ini dibuat untuk mengklasifikasikan kualitas padi organik</p>
+                  </div>
+                <!-- End Tab 1 Content -->
+
+                <div class="tab-pane fade show" id="tab2">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
+                  </div>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Incidunt non veritatis illum ea ut nisi</h4>
+                  </div>
+                  </div>
+                <!-- End Tab 2 Content -->
+
+                <div class="tab-pane fade show" id="tab3">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
+                  </div>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Incidunt non veritatis illum ea ut nisi</h4>
+                  </div>
+                </div>
+                <!-- End Tab 3 Content -->
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <img src="{% static 'assetss/img/features-2.png' %}" class="img-fluid" alt="" />
+            </div>
+          </div>
+          <!-- End Feature Tabs -->
+        </div>
+      </section>
+      <!-- End Features Section -->
+
+      <!-- ======= Services Section ======= -->
+      <section id="services" class="services">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <p>Variabel</p>
+          </header>
+
+          <div class="row gy-4">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="service-box blue">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Varietas</h3>
+                <p>Deskripsi variabel</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="service-box orange">
+                <i class="ri-discuss-line icon"></i>
+                <h3>PH</h3>
+                <p>Deskripsi PH</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="service-box green">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Boron</h3>
+                <p>Deskripsi Boron</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+              <div class="service-box red">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Warna</h3>
+                <p>Deskripsi Warna</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+              <div class="service-box purple">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Rasa</h3>
+                <p>Deskripsi Rasa</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+              <div class="service-box pink">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Teknik</h3>
+                <p>Deskripsi Teknik</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+              <div class="service-box purple">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Musim</h3>
+                <p>Deskripsi Musim</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+              <div class="service-box red">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Penyakit</h3>
+                <p>Deskripsi Penyakit</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+              <div class="service-box blue">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Phospor</h3>
+                <p>Deskripsi Phospor</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Services Section -->
+
+      <!-- ======= F.A.Q Section ======= -->
+      <section id="faq" class="faq">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <h2>F.A.Q</h2>
+            <p>Frequently Asked Questions</p>
+          </header>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <!-- F.A.Q List 1-->
+              <div class="accordion accordion-flush" id="faqlist1">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">Bagaimana cara menggunakan sistem ini?</button>
+                  </h2>
+                  <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                    <div class="accordion-body">Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">Apakah bisa upload file?</button>
+                  </h2>
+                  <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                    <div class="accordion-body">
+                      Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper
+                      dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">Apa perbedaanya klasifikasi dengan mode guest dan mode admin?</button>
+                  </h2>
+                  <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                    <div class="accordion-body">
+                      Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna
+                      duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <!-- F.A.Q List 2-->
+              <div class="accordion accordion-flush" id="faqlist2">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-1">Apa tujuan dibuatnya sistem ini?</button>
+                  </h2>
+                  <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                    <div class="accordion-body">
+                      Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper
+                      dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-2">siapa saja yang dapat menggunakan sistem ini?</button>
+                  </h2>
+                  <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                    <div class="accordion-body">
+                      Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis
+                      blandit turpis cursus in
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-3">apa fungsi sistem ini?</button>
+                  </h2>
+                  <div id="faq2-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                    <div class="accordion-body">
+                      Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus
+                      vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End F.A.Q Section -->
+
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <p>Klasifikasikan Padi</p>
+          </header>
+          <div class="row gy-4">
+
+            <div class="col">
+              <!-- Index(['Varietas', 'Warna', 'rasa', 'teknik', 'Musim', 'Penyakit',
+       'Kategori_Boron', 'Kategori_Fosfor', 'Kategori_PH', 'Grade_mutu'],
+      dtype='object') -->
+              <form action="forms/contact.php" method="post" class="php-email-form">
+                <div class="row gy-4">
+                  <div class="col-md-6">
+                    <input type="text" name="Varietas" class="form-control" placeholder="Varietas" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="Warna" placeholder="Warna" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="rasa" placeholder="rasa" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="teknik" placeholder="teknik" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="Musim" placeholder="Musim" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="Penyakit" placeholder="Penyakit" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="Kategori_Boron" placeholder="Kategori_Boron" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="Kategori_Fosfor" placeholder="Kategori_Fosfor" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="Kategori_PH" placeholder="Kategori_PH" required />
+                  </div>
+                  <div class="col-md-12 text-center">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                    <button type="submit">Send Message</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Contact Section
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row gy-4">
+            <div class="col-lg-5 col-md-12 footer-info">
+              <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assetss/img/logo.png" alt="" />
+                <span>SIKKPO</span>
+              </a>
+              <p>Website ini merupakan website untuk program aplikasi klasifikasi kualitas mutu padi organik untuk menyelesaikan skripsi</p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-2 col-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong><span>FlexStart</span></strong
+          >. All Rights Reserved
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assetss/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assetss/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'assetss/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assetss/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'assetss/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assetss/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assetss/vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assetss/js/main.js' %}"></script>
+  </body>
+</html>
