@@ -395,27 +395,30 @@ License: For each use you must have a valid license purchased only from above li
                 <!--begin::Content-->
                 <div id="kt_account_profile_details" class="collapse show">
                   <!--begin::Form-->
-                  <form id="kt_account_profile_details_form" class="form">
+                  <form id="kt_account_profile_details_form" action="/prediction" method="post" class="form">
+                    {% csrf_token %}
                     <!--begin::Card body-->
                     <div class="card-body border-top p-6">
                       <!--begin::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6" for="Varietas">
                           <span class="required">Varietas</span>
                           <i class="fas fa-exclamation-circle ms-0 fs-7" data-bs-toggle="tooltip" title="varietas"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                          <select name="varietas" aria-label="Pilih Varietas" data-control="select2" data-placeholder="Pilih Varietas..." class="form-select form-select-solid form-select-lg fw-bold">
-                            <option value="">Pilih Varietas...</option>
-                            <option value="TT">Panda Wangi</option>
-                            <option value="TN">Ciheran</option>
-                            <option value="TR">Mi Kongga</option>
-                            <option value="TM">IR 64</option>
-                            <option value="TC">Beras Merah</option>
-                            <option value="TC">Beras Hitam</option>
+                          <select name="Varietas" id="Varietas" aria-label="Pilih Varietas" data-control="select2" data-placeholder="Pilih Varietas..." class="form-select form-select-solid form-select-lg fw-bold">
+                            {% if not varietas %}
+                            <option value="" hidden>Pilih Varietas...</option>
+                            {% endif %}
+                            <option value="0.0" {% if varietas == 0.0 %} selected{% endif %}>Beras Hitam</option>
+                            <option value="0.6" {% if varietas == 0.6 %} selected{% endif %}>Ciheran</option>
+                            <option value="0.4" {% if varietas == 0.4 %} selected{% endif %}>IR 64</option>
+                            <option value="0.8" {% if varietas == 0.8 %} selected{% endif %}>Mi Kongga</option>
+                            <option value="0.2" {% if varietas == 0.2 %} selected{% endif %}>Beras Merah</option>
+                            <option value="1.0" {% if varietas == 1.0 %} selected{% endif %}>Pandan Wangi</option>
                           </select>
                         </div>
                         <!--end::Col-->
@@ -424,19 +427,21 @@ License: For each use you must have a valid license purchased only from above li
                       <!--begin::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6" for="Warna">
                           <span class="required">Warna</span>
                           <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="warna"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                          <select name="warna" aria-label="Pilih Warna" data-control="select2" data-placeholder="Pilih Warna..." class="form-select form-select-solid form-select-lg fw-bold">
-                            <option value="">Pilih Varietas...</option>
-                            <option value="TT">Putih</option>
-                            <option value="TN">Coklat</option>
-                            <option value="TC">Merah</option>
-                            <option value="TC">Hitam</option>
+                          <select name="Warna" id="Warna" aria-label="Pilih Warna" data-control="select2" data-placeholder="Pilih Warna..." class="form-select form-select-solid form-select-lg fw-bold">
+                            {% if not warna %}
+                            <option value="">Pilih Warna...</option>
+                            {% endif %}
+                            <option value="0.67" {% if warna == 0.67 %} selected{% endif %}>Merah</option>
+                            <option value="0.0" {% if warna == 0.0 %} selected{% endif %}>Coklat</option>
+                            <option value="0.33" {% if warna == 0.33 %} selected{% endif %}>Hitam</option>
+                            <option value="1.0" {% if warna == 1.0 %} selected{% endif %}>Putih</option>
                           </select>
                         </div>
                         <!--end::Col-->
@@ -445,17 +450,19 @@ License: For each use you must have a valid license purchased only from above li
                       <!--begin::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6" for="rasa">
                           <span class="required">Rasa</span>
                           <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="rasa"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                          <select name="rasa" aria-label="Pilih Rasa" data-control="select2" data-placeholder="Pilih Rasa..." class="form-select form-select-solid form-select-lg fw-bold">
-                            <option value="">Pilih Rasa...</option>
-                            <option value="TT">Pulen</option>
-                            <option value="TN">Sangat Pulen</option>
+                          <select name="rasa" id="rasa" aria-label="Pilih Rasa" data-control="select2" data-placeholder="Pilih Rasa..." class="form-select form-select-solid form-select-lg fw-bold">
+                            {% if not rasa %}
+                            <option value="" hidden>Pilih Rasa...</option>
+                            {% endif %}
+                            <option value="0.0" {% if rasa == 0.0 %} selected {% endif %}>Pulen</option>
+                            <option value="1.0" {% if rasa == 1.0 %} selected {% endif %}>Sangat Pulen</option>
                           </select>
                         </div>
                         <!--end::Col-->
@@ -464,17 +471,19 @@ License: For each use you must have a valid license purchased only from above li
                       <!--begin::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6" for="teknik">
                           <span class="required">Teknik</span>
                           <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="teknik"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                          <select name="teknik" aria-label="Pilih Teknik" data-control="select2" data-placeholder="Pilih Teknik..." class="form-select form-select-solid form-select-lg fw-bold">
-                            <option value="">Pilih Teknik...</option>
-                            <option value="TT">Jajar Legowo</option>
-                            <option value="TN">SRI</option>
+                          <select name="teknik" id="teknik" aria-label="Pilih Teknik" data-control="select2" data-placeholder="Pilih Teknik..." class="form-select form-select-solid form-select-lg fw-bold">
+                            {% if not teknik %}
+                            <option value="" hidden>Pilih Teknik...</option>
+                            {% endif %}
+                            <option value="0.0" {% if teknik == 0.0 %} selected {% endif %}>Jajar Legowo</option>
+                            <option value="1.0" {% if teknik == 1.0 %} selected {% endif %}>SRI</option>
                           </select>
                         </div>
                         <!--end::Col-->
@@ -483,17 +492,19 @@ License: For each use you must have a valid license purchased only from above li
                       <!--begin::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6" for="Musim">
                           <span class="required">Musim</span>
                           <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="musim"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                          <select name="musim" aria-label="Pilih Musim" data-control="select2" data-placeholder="Pilih Musim..." class="form-select form-select-solid form-select-lg fw-bold">
-                            <option value="">Pilih Musim...</option>
-                            <option value="TT">Kemarau</option>
-                            <option value="TN">Hujan</option>
+                          <select name="Musim" id="Musim" aria-label="Pilih Musim" data-control="select2" data-placeholder="Pilih Musim..." class="form-select form-select-solid form-select-lg fw-bold">
+                            {% if not musim %}
+                            <option value="" hidden>Pilih Musim...</option>
+                            {% endif %}
+                            <option value="0.0" {% if musim == 0.0 %} selected {% endif %}>Hujan</option>
+                            <option value="1.0" {% if musim == 1.0 %} selected {% endif %}>Kemarau</option>
                           </select>
                         </div>
                         <!--end::Col-->
@@ -502,20 +513,22 @@ License: For each use you must have a valid license purchased only from above li
                       <!--begin::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6" for="Penyakit">
                           <span class="required">Penyakit</span>
                           <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="penyakit"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                          <select name="penyakit" aria-label="Pilih Penyakit" data-control="select2" data-placeholder="Pilih Penyakit..." class="form-select form-select-solid form-select-lg fw-bold">
-                            <option value="">Pilih Penyakit...</option>
-                            <option value="TT">Burung</option>
-                            <option value="TN">Penggerek Batang</option>
-                            <option value="TR">Wereng Coklat</option>
-                            <option value="TM">Wereng Hijau</option>
-                            <option value="TC">Tikus</option>
+                          <select name="Penyakit" id="Penyakit" aria-label="Pilih Penyakit" data-control="select2" data-placeholder="Pilih Penyakit..." class="form-select form-select-solid form-select-lg fw-bold">
+                            {% if not penyakit %}
+                            <option value="" hidden>Pilih Penyakit...</option>
+                            {% endif %}
+                            <option value="0.0" {% if penyakit == 0.0 %} selected {% endif %}>Burung</option>
+                            <option value="0.25" {% if penyakit == 0.25 %} selected {% endif %}>Penggerek Batang</option>
+                            <option value="0.5" {% if penyakit == 0.5 %} selected {% endif %}>Tikus</option>
+                            <option value="1.0" {% if penyakit == 1.0 %} selected {% endif %}>Wereng Hijau</option>
+                            <option value="0.75" {% if penyakit == 0.75 %} selected {% endif %}>Wereng Coklat</option>
                           </select>
                         </div>
                         <!--end::Col-->
@@ -524,19 +537,21 @@ License: For each use you must have a valid license purchased only from above li
                       <!--begin::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6" for="PH">
                           <span class="required">PH</span>
                           <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="ph"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                          <select name="ph" aria-label="Pilih PH" data-control="select2" data-placeholder="Pilih PH..." class="form-select form-select-solid form-select-lg fw-bold">
-                            <option value="">Pilih PH...</option>
-                            <option value="TT">2</option>
-                            <option value="TN">3</option>
-                            <option value="TR">4</option>
-                            <option value="TM">5</option>
+                          <select name="PH" id="PH" aria-label="Pilih PH" data-control="select2" data-placeholder="Pilih PH..." class="form-select form-select-solid form-select-lg fw-bold">
+                            {% if not ph %}
+                            <option value="" hidden>Pilih PH...</option>
+                            {% endif %}
+                            <option value="0.0" {% if ph == 0 %} selected {% endif %}>2</option>
+                            <option value="0.33" {% if ph == 0.33 %} selected {% endif %}>3</option>
+                            <option value="0.667" {% if ph == 0.667 %} selected {% endif %}>4</option>
+                            <option value="1.0" {% if ph == 1.0 %} selected {% endif %}>5</option>
                           </select>
                         </div>
                         <!--end::Col-->
@@ -545,14 +560,14 @@ License: For each use you must have a valid license purchased only from above li
                       <!--begin::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6" for="boron">
                           <span class="required">Boron</span>
                           <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="boron"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                          <input type="number" name="boron" class="form-control form-control-lg form-control-solid" placeholder="Masukkan nilai Boron" value="1.02; 1.03" />
+                          <input type="number" name="boron" id="boron" class="form-control form-control-lg form-control-solid" value="{% if boron %}{{ boron }}{% endif %}" placeholder="{% if boron %}{{ boron }}{% else %}Masukkan nilai Boron{% endif %}" step="any" />
                         </div>
                         <!--end::Col-->
                       </div>
@@ -560,14 +575,37 @@ License: For each use you must have a valid license purchased only from above li
                       <!--begin::Input group-->
                       <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6" for="fosfor">
                           <span class="required">Fosfor</span>
                           <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="fosfor"></i>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                          <input type="number" name="fosfor" class="form-control form-control-lg form-control-solid" placeholder="Masukkan nilai Fosfor" value="3.02; 3.03" />
+                          <input
+                            type="number"
+                            name="fosfor"
+                            id="fosfor"
+                            class="form-control form-control-lg form-control-solid"
+                            placeholder="{% if fosfor %}{{ fosfor }}{% else %}Masukkan nilai Fosfor{% endif %}"
+                            step="any"
+                            value="{% if fosfor %}{{ fosfor }}{% endif %}"
+                          />
+                        </div>
+                        <!--end::Col-->
+                      </div>
+                      <!--end::Input group-->
+                      <!--begin::Input group-->
+                      <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label fw-bold fs-6" for="prediction">
+                          <span class="required">Grade Mutu</span>
+                          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Hasil Prediksi"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                          <input type="text" disabled name="prediction" id="prediction" class="form-control form-control-lg form-control-solid" placeholder="{{ prediction }}" />
                         </div>
                         <!--end::Col-->
                       </div>
@@ -577,7 +615,7 @@ License: For each use you must have a valid license purchased only from above li
                     <!--begin::Actions-->
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                       <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                      <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
+                      <button type="submit" name="prediction" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
                     </div>
                     <!--end::Actions-->
                   </form>
@@ -588,73 +626,6 @@ License: For each use you must have a valid license purchased only from above li
               <!--end::Basic info-->
               <!--begin::Row-->
               <div class="row g-5 g-xl-8">
-                <!--begin::Col-->
-                <div class="col-xl-4 ps-xl-12">
-                  <!--begin::Engage widget 1-->
-                  <div class="card bgi-position-y-bottom bgi-position-x-end bgi-no-repeat bgi-size-cover min-h-25px bg-primary mb-5 mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <!--begin::Title-->
-                      <span class="fs-2x fw-bolder text-gray-800">
-                        <span data-kt-countup="true">98%</span>
-                      </span>
-                      <!--end::Title-->
-                      <!--begin::Action-->
-                      <div class="m-0">
-                        <h3 class="text-white fs-2x fw-bolder line-height-lg mb-5">Accuracy</h3>
-                      </div>
-                      <!--begin::Action-->
-                    </div>
-                    <!--end::Body-->
-                  </div>
-                  <!--end::Engage widget 1-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-4 ps-xl-12">
-                  <!--begin::Engage widget 1-->
-                  <div class="card bgi-position-y-bottom bgi-position-x-end bgi-no-repeat bgi-size-cover min-h-25px bg-primary mb-5 mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <!--begin::Title-->
-                      <span class="fs-2x fw-bolder text-gray-800">
-                        <span data-kt-countup="true">98%</span>
-                      </span>
-                      <!--end::Title-->
-                      <!--begin::Action-->
-                      <div class="m-0">
-                        <h3 class="text-white fs-2x fw-bolder line-height-lg mb-5">Recall</h3>
-                      </div>
-                      <!--begin::Action-->
-                    </div>
-                    <!--end::Body-->
-                  </div>
-                  <!--end::Engage widget 1-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-4 ps-xl-12">
-                  <!--begin::Engage widget 1-->
-                  <div class="card bgi-position-y-bottom bgi-position-x-end bgi-no-repeat bgi-size-cover min-h-25px bg-primary mb-5 mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <!--begin::Title-->
-                      <span class="fs-2x fw-bolder text-gray-800">
-                        <span data-kt-countup="true">98%</span>
-                      </span>
-                      <!--end::Title-->
-                      <!--begin::Action-->
-                      <div class="m-0">
-                        <h3 class="text-white fs-2x fw-bolder line-height-lg mb-5">Precision</h3>
-                      </div>
-                      <!--begin::Action-->
-                    </div>
-                    <!--end::Body-->
-                  </div>
-                  <!--end::Engage widget 1-->
-                </div>
-                <!--end::Col-->
-
                 <!--begin::Card-->
                 <div class="card pt-4 mb-6 mb-xl-9">
                   <!--begin::Card header-->
@@ -668,17 +639,24 @@ License: For each use you must have a valid license purchased only from above li
                   <!--end::Card header-->
                   <!--begin::Card body-->
                   <div class="card-body pt-0 pb-5">
+                    {% if results %}
                     <!--begin::Table-->
                     <table class="table align-middle table-row-dashed gy-5" id="kt_table_customers_payment">
                       <!--begin::Table head-->
                       <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
                         <!--begin::Table row-->
                         <tr class="text-start text-muted text-uppercase gs-0">
-                          <th class="min-w-100px">Invoice No.</th>
-                          <th>Status</th>
-                          <th>Amount</th>
-                          <th class="min-w-100px">Date</th>
-                          <th class="text-end min-w-100px pe-4">Actions</th>
+                          <th>No</th>
+                          <th>Varietas</th>
+                          <th>Warna</th>
+                          <th>Rasa</th>
+                          <th>Musim</th>
+                          <th>Penyakit</th>
+                          <th>Teknik</th>
+                          <th>PH</th>
+                          <th>Boron</th>
+                          <th>Fosfor</th>
+                          <th>Prediction</th>
                         </tr>
                         <!--end::Table row-->
                       </thead>
@@ -686,162 +664,27 @@ License: For each use you must have a valid license purchased only from above li
                       <!--begin::Table body-->
                       <tbody class="fs-6 fw-bold text-gray-600">
                         <!--begin::Table row-->
+                        {% for result in results %}
                         <tr>
-                          <!--begin::Invoice=-->
-                          <td>
-                            <a href="#" class="text-gray-600 text-hover-primary mb-1">4185-8194</a>
-                          </td>
-                          <!--end::Invoice=-->
-                          <!--begin::Status=-->
-                          <td>
-                            <span class="badge badge-light-success">Successful</span>
-                          </td>
-                          <!--end::Status=-->
-                          <!--begin::Amount=-->
-                          <td>$129.00</td>
-                          <!--end::Amount=-->
-                          <!--begin::Date=-->
-                          <td>11 Sep 2020, 3:18 pm</td>
-                          <!--end::Date=-->
-                          <!--begin::Action=-->
-                          <td class="pe-0 text-end">
-                            <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
-                              >Actions
-                              <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                              <span class="svg-icon svg-icon-5 m-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                  <path
-                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                    fill="black"
-                                  />
-                                </svg>
-                              </span>
-                              <!--end::Svg Icon--></a
-                            >
-                            <!--begin::Menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="../../demo9/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-                              </div>
-                              <!--end::Menu item-->
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-                              </div>
-                              <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                          </td>
-                          <!--end::Action=-->
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ result.varietas }}</td>
+                          <td>{{ result.warna }}</td>
+                          <td>{{ result.rasa }}</td>
+                          <td>{{ result.musim }}</td>
+                          <td>{{ result.penyakit }}</td>
+                          <td>{{ result.teknik }}</td>
+                          <td>{{ result.ph }}</td>
+                          <td>{{ result.boron }}</td>
+                          <td>{{ result.fosfor }}</td>
+                          <td>{{ result.prediction }}</td>
                         </tr>
-                        <!--end::Table row-->
-                        <!--begin::Table row-->
-                        <tr>
-                          <!--begin::Invoice=-->
-                          <td>
-                            <a href="#" class="text-gray-600 text-hover-primary mb-1">1233-5397</a>
-                          </td>
-                          <!--end::Invoice=-->
-                          <!--begin::Status=-->
-                          <td>
-                            <span class="badge badge-light-danger">Rejected</span>
-                          </td>
-                          <!--end::Status=-->
-                          <!--begin::Amount=-->
-                          <td>$450.00</td>
-                          <!--end::Amount=-->
-                          <!--begin::Date=-->
-                          <td>03 Sep 2020, 1:08 am</td>
-                          <!--end::Date=-->
-                          <!--begin::Action=-->
-                          <td class="pe-0 text-end">
-                            <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
-                              >Actions
-                              <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                              <span class="svg-icon svg-icon-5 m-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                  <path
-                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                    fill="black"
-                                  />
-                                </svg>
-                              </span>
-                              <!--end::Svg Icon--></a
-                            >
-                            <!--begin::Menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="../../demo9/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-                              </div>
-                              <!--end::Menu item-->
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-                              </div>
-                              <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                          </td>
-                          <!--end::Action=-->
-                        </tr>
-                        <!--end::Table row-->
-                        <!--begin::Table row-->
-                        <tr>
-                          <!--begin::Invoice=-->
-                          <td>
-                            <a href="#" class="text-gray-600 text-hover-primary mb-1">4169-5355</a>
-                          </td>
-                          <!--end::Invoice=-->
-                          <!--begin::Status=-->
-                          <td>
-                            <span class="badge badge-light-warning">Pending</span>
-                          </td>
-                          <!--end::Status=-->
-                          <!--begin::Amount=-->
-                          <td>$8,700.00</td>
-                          <!--end::Amount=-->
-                          <!--begin::Date=-->
-                          <td>01 Sep 2020, 4:58 pm</td>
-                          <!--end::Date=-->
-                          <!--begin::Action=-->
-                          <td class="pe-0 text-end">
-                            <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
-                              >Actions
-                              <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                              <span class="svg-icon svg-icon-5 m-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                  <path
-                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                    fill="black"
-                                  />
-                                </svg>
-                              </span>
-                              <!--end::Svg Icon--></a
-                            >
-                            <!--begin::Menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="../../demo9/dist/apps/customers/view.html" class="menu-link px-3">View</a>
-                              </div>
-                              <!--end::Menu item-->
-                              <!--begin::Menu item-->
-                              <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-                              </div>
-                              <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                          </td>
-                          <!--end::Action=-->
-                        </tr>
+                        {% endfor %}
                         <!--end::Table row-->
                       </tbody>
                       <!--end::Table body-->
                     </table>
                     <!--end::Table-->
+                    {% endif %}
                   </div>
                   <!--end::Card body-->
                 </div>

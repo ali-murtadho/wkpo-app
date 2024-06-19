@@ -58,7 +58,8 @@ License: For each use you must have a valid license purchased only from above li
           <!--begin::Wrapper-->
           <div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
             <!--begin::Form-->
-            <form class="form w-100" novalidate="novalidate" id="kt_sign_up_form">
+            <form class="form w-100" novalidate="novalidate" method="post">
+              {% csrf_token %}
               <!--begin::Heading-->
               <div class="mb-10 text-center">
                 <!--begin::Title-->
@@ -79,9 +80,12 @@ License: For each use you must have a valid license purchased only from above li
               <!--begin::Input group-->
               <div class="row fv-row mb-7">
                 <!--begin::Col-->
-                <div class="col-xl-6">
+                <div class="col-xl-12">
                   <label class="form-label fw-bolder text-dark fs-6">Username</label>
-                  <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first-name" autocomplete="off" />
+                  <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="username" autocomplete="off" />
+                  <!--begin::Hint-->
+                  <div class="text-muted">username must Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
+                  <!--end::Hint-->
                 </div>
                 <!--end::Col-->
               </div>
@@ -95,7 +99,7 @@ License: For each use you must have a valid license purchased only from above li
                   <!--end::Label-->
                   <!--begin::Input wrapper-->
                   <div class="position-relative mb-3">
-                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password" autocomplete="off" />
+                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password1" autocomplete="off" />
                     <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
                       <i class="bi bi-eye-slash fs-2"></i>
                       <i class="bi bi-eye fs-2 d-none"></i>
@@ -113,16 +117,24 @@ License: For each use you must have a valid license purchased only from above li
                 </div>
                 <!--end::Wrapper-->
                 <!--begin::Hint-->
-                <div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+                <ul class="text-muted">
+                  <li>Your password can’t be too similar to your other personal information.</li>
+                  <li>Your password must contain at least 8 characters.</li>
+                  <li>Your password can’t be a commonly used password.</li>
+                  <li>Your password can’t be entirely numeric.</li>
+                </ul>
                 <!--end::Hint-->
               </div>
               <!--end::Input group=-->
+              <!-- begin::Input group-->
+              <div class="fv-row mb-5">
+                <label class="form-label fw-bolder text-dark fs-6">Confirm Password</label>
+                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password2" autocomplete="off" />
+              </div>
+              <!--end::Input group -->
               <!--begin::Actions-->
               <div class="text-center">
-                <button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
-                  <span class="indicator-label">Submit</span>
-                  <span class="indicator-progress">Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                </button>
+                <button type="submit" class="btn btn-lg btn-primary">Register</button>
               </div>
               <!--end::Actions-->
             </form>

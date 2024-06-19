@@ -395,15 +395,30 @@ License: For each use you must have a valid license purchased only from above li
                 <!--begin::Body-->
                 <div class="card-body py-10">
                   <!--begin::Row-->
-                  <div class="row mb-10">
+                  <div class="col mb-10">
                     <!--begin::Col-->
                     <div class="col pb-10 pb-lg-0">
-                      <h2>How to set API</h2>
+                      <h2>Latih Model</h2>
                       <p class="fs-6 fw-bold text-gray-600 py-2">
-                        Use images to enhance your post, improve its flow, add humor Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur exercitationem tempore doloremque totam dolor obcaecati quo accusamus aliquid
-                        consectetur nesciunt. <br />and explain complex topics
+                        Fitur latih model pada halaman ini akan melakukan train data menjadi 2 jenis, yaitu <br />
+                        1. Data tanpa smote <br />
+                        2. Data dengan Smote <br />
+                        kedua fitur bisa dilatih dengan menekan button Latih Model dibawah ini
                       </p>
-                      <a href="#" class="btn btn-light btn-active-light-primary">Get Started</a>
+                      <div class="col">
+                        <div class="d-inline-block">
+                          <form action="/training" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" name="train" class="btn btn-primary btn-active-light-primary">Latih Model</button>
+                          </form>
+                        </div>
+                        <div class="d-inline-block">
+                          <form action="/testing" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" name="test" class="btn btn-success btn-active-light-primary">Uji Model</button>
+                          </form>
+                        </div>
+                      </div>
                     </div>
                     <!--end::Col-->
                   </div>
@@ -426,7 +441,7 @@ License: For each use you must have a valid license purchased only from above li
                       <!--begin::Content-->
                       <div class="fw-bold">
                         <div class="fs-6 text-gray-700">
-                          Proses training kedua model membutuhkan waktu, mohon ditunggu
+                          Proses training ketiga model membutuhkan waktu, mohon ditunggu
                           <!-- <a class="fw-bolder" href="#">Learn More</a>. -->
                         </div>
                       </div>
@@ -445,17 +460,14 @@ License: For each use you must have a valid license purchased only from above li
               <div class="row gy-5 g-xl-10">
                 <!--begin::Col-->
                 <div class="col-xl-6">
-                  <!--begin::Charts Widget 1-->
-                  <div class="card card-xl-stretch mb-xl-10">
+                  <!--begin::Tables Widget 1-->
+                  <div class="card card-xl-stretch mb-5 mb-xl-10">
                     <!--begin::Header-->
                     <div class="card-header border-0 pt-5">
-                      <!--begin::Title-->
                       <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bolder fs-3 mb-1">Recent Statistics</span>
-                        <span class="text-muted fw-bold fs-7">More than 400 new members</span>
+                        <span class="card-label fw-bolder fs-3 mb-1">Hasil Uji 1 Data tanpa SMOTE</span>
+                        <span class="text-muted fw-bold fs-7">Data yang di latih ini berjumlah : 1872</span>
                       </h3>
-                      <!--end::Title-->
-                      <!--begin::Toolbar-->
                       <div class="card-toolbar">
                         <!--begin::Menu-->
                         <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -472,96 +484,158 @@ License: For each use you must have a valid license purchased only from above li
                           </span>
                           <!--end::Svg Icon-->
                         </button>
-                        <!--begin::Menu 1-->
-                        <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_614859bf7a149">
-                          <!--begin::Header-->
-                          <div class="px-7 py-5">
-                            <div class="fs-5 text-dark fw-bolder">Filter Options</div>
-                          </div>
-                          <!--end::Header-->
-                          <!--begin::Menu separator-->
-                          <div class="separator border-gray-200"></div>
-                          <!--end::Menu separator-->
-                          <!--begin::Form-->
-                          <div class="px-7 py-5">
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label fw-bold">Status:</label>
-                              <!--end::Label-->
-                              <!--begin::Input-->
-                              <div>
-                                <select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_614859bf7a149" data-allow-clear="true">
-                                  <option></option>
-                                  <option value="1">Approved</option>
-                                  <option value="2">Pending</option>
-                                  <option value="2">In Process</option>
-                                  <option value="2">Rejected</option>
-                                </select>
-                              </div>
-                              <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label fw-bold">Member Type:</label>
-                              <!--end::Label-->
-                              <!--begin::Options-->
-                              <div class="d-flex">
-                                <!--begin::Options-->
-                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-                                  <input class="form-check-input" type="checkbox" value="1" />
-                                  <span class="form-check-label">Author</span>
-                                </label>
-                                <!--end::Options-->
-                                <!--begin::Options-->
-                                <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                  <input class="form-check-input" type="checkbox" value="2" checked="checked" />
-                                  <span class="form-check-label">Customer</span>
-                                </label>
-                                <!--end::Options-->
-                              </div>
-                              <!--end::Options-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label fw-bold">Notifications:</label>
-                              <!--end::Label-->
-                              <!--begin::Switch-->
-                              <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-                                <label class="form-check-label">Enabled</label>
-                              </div>
-                              <!--end::Switch-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Actions-->
-                            <div class="d-flex justify-content-end">
-                              <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-                              <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-                            </div>
-                            <!--end::Actions-->
-                          </div>
-                          <!--end::Form-->
-                        </div>
-                        <!--end::Menu 1-->
                         <!--end::Menu-->
                       </div>
-                      <!--end::Toolbar-->
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
-                    <div class="card-body">
-                      <!--begin::Chart-->
-                      <div id="kt_charts_widget_1_chart" style="height: 350px"></div>
-                      <!--end::Chart-->
+                    <div class="card-body py-3">
+                      <!--begin::Table container-->
+                      <div class="table-responsive">
+                        <!--begin::Table-->
+                        <table class="table align-middle gs-0 gy-5">
+                          <!--begin::Table head-->
+                          <thead>
+                            <tr>
+                              <th class="p-0 w-50px"></th>
+                              <th class="p-0 min-w-200px"></th>
+                              <th class="p-0 min-w-100px"></th>
+                              <th class="p-0 min-w-40px"></th>
+                            </tr>
+                          </thead>
+                          <!--end::Table head-->
+                          <!--begin::Table body-->
+                          <tbody>
+                            <tr>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Accuracy</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    {% csrf_token %}
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ acc_score_cross_val_r03 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Recall</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ rec_score_cross_val_r03 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Presisi</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ prec_score_cross_val_r03 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Overfitting Score</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ overfitting_score_r03 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                      </div>
+                      <!--end::Table container-->
                     </div>
-                    <!--end::Body-->
                   </div>
-                  <!--end::Charts Widget 1-->
+                  <!--endW::Tables Widget 1-->
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
@@ -571,8 +645,8 @@ License: For each use you must have a valid license purchased only from above li
                     <!--begin::Header-->
                     <div class="card-header border-0 pt-5">
                       <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bolder fs-3 mb-1">Tasks Overview</span>
-                        <span class="text-muted fw-bold fs-7">Pending 10 tasks</span>
+                        <span class="card-label fw-bolder fs-3 mb-1">Hasil Uji 1 Data dengan SMOTE</span>
+                        <span class="text-muted fw-bold fs-7">Data yang di latih ini berjumlah : 3008</span>
                       </h3>
                       <div class="card-toolbar">
                         <!--begin::Menu-->
@@ -590,82 +664,6 @@ License: For each use you must have a valid license purchased only from above li
                           </span>
                           <!--end::Svg Icon-->
                         </button>
-                        <!--begin::Menu 1-->
-                        <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_614859bf7a586">
-                          <!--begin::Header-->
-                          <div class="px-7 py-5">
-                            <div class="fs-5 text-dark fw-bolder">Filter Options</div>
-                          </div>
-                          <!--end::Header-->
-                          <!--begin::Menu separator-->
-                          <div class="separator border-gray-200"></div>
-                          <!--end::Menu separator-->
-                          <!--begin::Form-->
-                          <div class="px-7 py-5">
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label fw-bold">Status:</label>
-                              <!--end::Label-->
-                              <!--begin::Input-->
-                              <div>
-                                <select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_614859bf7a586" data-allow-clear="true">
-                                  <option></option>
-                                  <option value="1">Approved</option>
-                                  <option value="2">Pending</option>
-                                  <option value="2">In Process</option>
-                                  <option value="2">Rejected</option>
-                                </select>
-                              </div>
-                              <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label fw-bold">Member Type:</label>
-                              <!--end::Label-->
-                              <!--begin::Options-->
-                              <div class="d-flex">
-                                <!--begin::Options-->
-                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-                                  <input class="form-check-input" type="checkbox" value="1" />
-                                  <span class="form-check-label">Author</span>
-                                </label>
-                                <!--end::Options-->
-                                <!--begin::Options-->
-                                <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                  <input class="form-check-input" type="checkbox" value="2" checked="checked" />
-                                  <span class="form-check-label">Customer</span>
-                                </label>
-                                <!--end::Options-->
-                              </div>
-                              <!--end::Options-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                              <!--begin::Label-->
-                              <label class="form-label fw-bold">Notifications:</label>
-                              <!--end::Label-->
-                              <!--begin::Switch-->
-                              <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-                                <label class="form-check-label">Enabled</label>
-                              </div>
-                              <!--end::Switch-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Actions-->
-                            <div class="d-flex justify-content-end">
-                              <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-                              <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-                            </div>
-                            <!--end::Actions-->
-                          </div>
-                          <!--end::Form-->
-                        </div>
-                        <!--end::Menu 1-->
                         <!--end::Menu-->
                       </div>
                     </div>
@@ -697,13 +695,12 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                               </th>
                               <td>
-                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Top Authors</a>
-                                <span class="text-muted fw-bold d-block fs-7">Successful Fellas</span>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Accuracy</a>
                               </td>
                               <td>
                                 <div class="d-flex flex-column w-100 me-2">
                                   <div class="d-flex flex-stack mb-2">
-                                    <span class="text-muted me-2 fs-7 fw-bold">70%</span>
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ acc_score_cross_val_m03 }}%</span>
                                   </div>
                                   <div class="progress h-6px w-100">
                                     <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
@@ -735,13 +732,12 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                               </th>
                               <td>
-                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Popular Authors</a>
-                                <span class="text-muted fw-bold d-block fs-7">Most Successful</span>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Recall</a>
                               </td>
                               <td>
                                 <div class="d-flex flex-column w-100 me-2">
                                   <div class="d-flex flex-stack mb-2">
-                                    <span class="text-muted me-2 fs-7 fw-bold">50%</span>
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ rec_score_cross_val_m03 }}%</span>
                                   </div>
                                   <div class="progress h-6px w-100">
                                     <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -773,13 +769,12 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                               </th>
                               <td>
-                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">New Users</a>
-                                <span class="text-muted fw-bold d-block fs-7">Awesome Users</span>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Presisi</a>
                               </td>
                               <td>
                                 <div class="d-flex flex-column w-100 me-2">
                                   <div class="d-flex flex-stack mb-2">
-                                    <span class="text-muted me-2 fs-7 fw-bold">80%</span>
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ prec_score_cross_val_m03 }}%</span>
                                   </div>
                                   <div class="progress h-6px w-100">
                                     <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -811,54 +806,15 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                               </th>
                               <td>
-                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Active Customers</a>
-                                <span class="text-muted fw-bold d-block fs-7">Best Customers</span>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Overfitting Score</a>
                               </td>
                               <td>
                                 <div class="d-flex flex-column w-100 me-2">
                                   <div class="d-flex flex-stack mb-2">
-                                    <span class="text-muted me-2 fs-7 fw-bold">90%</span>
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ overfitting_score_m03 }}%</span>
                                   </div>
                                   <div class="progress h-6px w-100">
                                     <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </div>
-                              </td>
-                              <td class="text-end">
-                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
-                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
-                                  <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
-                                      <path
-                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
-                                        fill="black"
-                                      />
-                                    </svg>
-                                  </span>
-                                  <!--end::Svg Icon-->
-                                </a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th>
-                                <div class="symbol symbol-50px me-2">
-                                  <span class="symbol-label">
-                                    <img src="{% static 'assets/media/svg/brand-logos/kickstarter.svg' %}" class="h-50 align-self-center" alt="" />
-                                  </span>
-                                </div>
-                              </th>
-                              <td>
-                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Bestseller Theme</a>
-                                <span class="text-muted fw-bold d-block fs-7">Amazing Templates</span>
-                              </td>
-                              <td>
-                                <div class="d-flex flex-column w-100 me-2">
-                                  <div class="d-flex flex-stack mb-2">
-                                    <span class="text-muted me-2 fs-7 fw-bold">70%</span>
-                                  </div>
-                                  <div class="progress h-6px w-100">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                                   </div>
                                 </div>
                               </td>
@@ -891,6 +847,424 @@ License: For each use you must have a valid license purchased only from above li
                 <!--end::Col-->
               </div>
               <!--end::Row-->
+              <!-- begin::Row-->
+              <div class="row gy-5 g-xl-10">
+                <!--begin::Col-->
+                <div class="col-xl-6">
+                  <!--begin::Tables Widget 1-->
+                  <div class="card card-xl-stretch mb-5 mb-xl-10">
+                    <!--begin::Header-->
+                    <div class="card-header border-0 pt-5">
+                      <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1">Hasil Uji 2 Data tanpa SMOTE</span>
+                        <span class="text-muted fw-bold fs-7">Data yang di latih ini berjumlah : 2578</span>
+                      </h3>
+                      <div class="card-toolbar">
+                        <!--begin::Menu-->
+                        <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                          <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+                          <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
+                                <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                                <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                                <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                              </g>
+                            </svg>
+                          </span>
+                          <!--end::Svg Icon-->
+                        </button>
+                        <!--end::Menu-->
+                      </div>
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body py-3">
+                      <!--begin::Table container-->
+                      <div class="table-responsive">
+                        <!--begin::Table-->
+                        <table class="table align-middle gs-0 gy-5">
+                          <!--begin::Table head-->
+                          <thead>
+                            <tr>
+                              <th class="p-0 w-50px"></th>
+                              <th class="p-0 min-w-200px"></th>
+                              <th class="p-0 min-w-100px"></th>
+                              <th class="p-0 min-w-40px"></th>
+                            </tr>
+                          </thead>
+                          <!--end::Table head-->
+                          <!--begin::Table body-->
+                          <tbody>
+                            <tr>
+                              <th>
+                                <div class="symbol symbol-50px me-2">
+                                  <span class="symbol-label">
+                                    <img src="{% static 'assets/media/svg/brand-logos/plurk.svg' %}" class="h-50 align-self-center" alt="" />
+                                  </span>
+                                </div>
+                              </th>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Accuracy</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ acc_score_cross_val_r04 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>
+                                <div class="symbol symbol-50px me-2">
+                                  <span class="symbol-label">
+                                    <img src="{% static 'assets/media/svg/brand-logos/telegram.svg' %}" class="h-50 align-self-center" alt="" />
+                                  </span>
+                                </div>
+                              </th>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Recall</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ rec_score_cross_val_r04 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>
+                                <div class="symbol symbol-50px me-2">
+                                  <span class="symbol-label">
+                                    <img src="{% static 'assets/media/svg/brand-logos/vimeo.svg' %}" class="h-50 align-self-center" alt="" />
+                                  </span>
+                                </div>
+                              </th>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Presisi</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ prec_score_cross_val_r04 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>
+                                <div class="symbol symbol-50px me-2">
+                                  <span class="symbol-label">
+                                    <img src="{% static 'assets/media/svg/brand-logos/bebo.svg' %}" class="h-50 align-self-center" alt="" />
+                                  </span>
+                                </div>
+                              </th>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Overfitting Score</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ overfitting_score_r04 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                      </div>
+                      <!--end::Table container-->
+                    </div>
+                  </div>
+                  <!--endW::Tables Widget 1-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-6">
+                  <!--begin::Tables Widget 1-->
+                  <div class="card card-xl-stretch mb-5 mb-xl-10">
+                    <!--begin::Header-->
+                    <div class="card-header border-0 pt-5">
+                      <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1">Hasil Uji 2 Data dengan SMOTE</span>
+                        <span class="text-muted fw-bold fs-7">Data yang di latih ini berjumlah : 1605</span>
+                      </h3>
+                      <div class="card-toolbar">
+                        <!--begin::Menu-->
+                        <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                          <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+                          <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
+                                <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                                <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                                <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                              </g>
+                            </svg>
+                          </span>
+                          <!--end::Svg Icon-->
+                        </button>
+                        <!--end::Menu-->
+                      </div>
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body py-3">
+                      <!--begin::Table container-->
+                      <div class="table-responsive">
+                        <!--begin::Table-->
+                        <table class="table align-middle gs-0 gy-5">
+                          <!--begin::Table head-->
+                          <thead>
+                            <tr>
+                              <th class="p-0 w-50px"></th>
+                              <th class="p-0 min-w-200px"></th>
+                              <th class="p-0 min-w-100px"></th>
+                              <th class="p-0 min-w-40px"></th>
+                            </tr>
+                          </thead>
+                          <!--end::Table head-->
+                          <!--begin::Table body-->
+                          <tbody>
+                            <tr>
+                              <th>
+                                <div class="symbol symbol-50px me-2">
+                                  <span class="symbol-label">
+                                    <img src="{% static 'assets/media/svg/brand-logos/plurk.svg' %}" class="h-50 align-self-center" alt="" />
+                                  </span>
+                                </div>
+                              </th>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Accuracy</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ acc_score_cross_val_m04 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>
+                                <div class="symbol symbol-50px me-2">
+                                  <span class="symbol-label">
+                                    <img src="{% static 'assets/media/svg/brand-logos/telegram.svg' %}" class="h-50 align-self-center" alt="" />
+                                  </span>
+                                </div>
+                              </th>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Recall</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ rec_score_cross_val_m04 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>
+                                <div class="symbol symbol-50px me-2">
+                                  <span class="symbol-label">
+                                    <img src="{% static 'assets/media/svg/brand-logos/vimeo.svg' %}" class="h-50 align-self-center" alt="" />
+                                  </span>
+                                </div>
+                              </th>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Presisi</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ prec_score_cross_val_m04 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>
+                                <div class="symbol symbol-50px me-2">
+                                  <span class="symbol-label">
+                                    <img src="{% static 'assets/media/svg/brand-logos/bebo.svg' %}" class="h-50 align-self-center" alt="" />
+                                  </span>
+                                </div>
+                              </th>
+                              <td>
+                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Overfitting Score</a>
+                              </td>
+                              <td>
+                                <div class="d-flex flex-column w-100 me-2">
+                                  <div class="d-flex flex-stack mb-2">
+                                    <span class="text-muted me-2 fs-7 fw-bold">{{ overfitting_score_m04 }}%</span>
+                                  </div>
+                                  <div class="progress h-6px w-100">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                  <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
+                                      <path
+                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                      </div>
+                      <!--end::Table container-->
+                    </div>
+                  </div>
+                  <!--endW::Tables Widget 1-->
+                </div>
+                <!--end::Col-->
+              </div>
+              <!--end::Row -->
             </div>
             <!--end::Container-->
           </div>

@@ -386,7 +386,7 @@ License: For each use you must have a valid license purchased only from above li
                 <!--begin::Content-->
                 <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
                   <!--begin::Messenger-->
-                  <div class="card" id="kt_chat_messenger">
+                  <div class="card mb-3" id="kt_chat_messenger">
                     <!--begin::Card header-->
                     <div class="card-header" id="kt_chat_messenger_header">
                       <!--begin::Title-->
@@ -395,7 +395,7 @@ License: For each use you must have a valid license purchased only from above li
                         <div class="d-flex justify-content-center flex-column me-3">
                           <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Upload File</a>
                           <!--begin::Hint-->
-                          <div class="form-text">Please select a preferred language, including date, time, and number formatting.</div>
+                          <div class="form-text"><a href="{% url 'download-csv' %}">Unduh Format Import disini</a></div>
                           <!--end::Hint-->
                         </div>
                         <!--end::User-->
@@ -405,27 +405,98 @@ License: For each use you must have a valid license purchased only from above li
                     <!--end::Card header-->
                     <!--begin::Card footer-->
                     <div class="card-footer pt-4" id="kt_chat_messenger_footer">
-                      <!--begin:Toolbar-->
-                      <div class="d-flex flex-stack">
-                        <!--begin::Actions-->
-                        <div class="d-flex align-items-center me-2">
-                          <button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-                            <i class="bi bi-paperclip fs-3"></i>
-                          </button>
-                          <button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
+                      <form action="/excel-classification" enctype="multipart/form-data" method="post">
+                        {% csrf_token %}
+                        <!--begin:Toolbar-->
+                        <div class="d-flex flex-stack">
+                          <!--begin::Actions-->
+                          <label for="csv_file" class="upload-icon">
+                            <input type="file" id="csv_file" name="csv_file" class="file-input" accept=".csv" />
                             <i class="bi bi-upload fs-3"></i>
-                          </button>
+                          </label>
+                          <!--end::Actions-->
+                          <!--begin::Send-->
+                          <button class="btn btn-primary" type="submit">Klasifikasikan</button>
+                          <!--end::Send-->
                         </div>
-                        <!--end::Actions-->
-                        <!--begin::Send-->
-                        <button class="btn btn-primary" type="button" data-kt-element="send">Upload</button>
-                        <!--end::Send-->
-                      </div>
-                      <!--end::Toolbar-->
+                        <!--end::Toolbar-->
+                      </form>
                     </div>
                     <!--end::Card footer-->
                   </div>
+                  <!--begin::Notice-->
+                  <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6 mb-3">
+                    <!--begin::Icon-->
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
+                    <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
+                        <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black" />
+                        <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black" />
+                      </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                    <!--end::Icon-->
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-stack flex-grow-1">
+                      <!--begin::Content-->
+                      <div class="fw-bold">
+                        <h4 class="text-gray-900 fw-bolder">Mohon perhatikan ketentuannya :</h4>
+                        <ul class="fs-6 text-gray-700">
+                          <li>Mohon pastikan file yang anda inputkan bertipe <b style="color: red">.csv</b></li>
+                          <li>Anda bisa mengunduh format import <a href="{% url 'download-csv' %}">disini</a></li>
+                          <li>Proses klasifikasi dengan file CSV ini bisa memakan waktu yang tidak sebentar, mohon menunggu</li>
+                        </ul>
+                      </div>
+                      <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
+                  </div>
+                  <!--end::Notice-->
                   <!--end::Messenger-->
+                  <!--begin::Row-->
+                  <div class="row g-5 g-xl-8">
+                    <!--begin::Card-->
+                    <div class="card pt-4 mb-6 mb-xl-9">
+                      <!--begin::Card body-->
+                      <div class="card-body pt-0 pb-5">
+                        {% if columns and rows %}
+                        <!--begin::Table-->
+                        <h2>Hasil Klasifikasi</h2>
+                        <table class="table align-middle table-row-dashed gy-5" id="kt_table_customers_payment">
+                          <!--begin::Table head-->
+                          <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
+                            <!--begin::Table row-->
+                            <tr class="text-start text-muted text-uppercase gs-0">
+                              {% for column in columns %}
+                              <th>{{ column }}</th>
+                              {% endfor %}
+                            </tr>
+                            <!--end::Table row-->
+                          </thead>
+                          <!--end::Table head-->
+                          <!--begin::Table body-->
+                          <tbody class="fs-6 fw-bold text-gray-600">
+                            <!--begin::Table row-->
+                            {% for row in rows %}
+                            <tr>
+                              {% for cell in row %}
+                              <td>{{ cell }}</td>
+                              {% endfor %}
+                            </tr>
+                            {% endfor %}
+                            <!--end::Table row-->
+                          </tbody>
+                          <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                        {% endif %}
+                      </div>
+                      <!--end::Card body-->
+                    </div>
+                    <!--end::Card-->
+                  </div>
+                  <!--end::Row-->
                 </div>
                 <!--end::Content-->
               </div>
@@ -2182,6 +2253,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{% static 'assets/js/custom/modals/create-app.js' %}"></script>
     <script src="{% static 'assets/js/custom/modals/upgrade-plan.js' %}"></script>
     <!--end::Page Custom Javascript-->
+
     <!--end::Javascript-->
   </body>
   <!--end::Body-->

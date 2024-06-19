@@ -50,7 +50,7 @@
             <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
             <li><a class="nav-link scrollto" href="#portfolio">About</a></li>
             <li><a class="nav-link scrollto" href="#about">Klasifikasi</a></li>
-            <li><a class="nav-link scrollto" href="#services">Upload</a></li>
+            <!-- <li><a class="nav-link scrollto" href="#services">Upload</a></li> -->
             <li><a class="getstarted scrollto" href="{% url 'login' %}">Login</a></li>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
@@ -103,7 +103,9 @@
               <div class="box">
                 <img src="{% static 'assetss/img/values-1.png' %}" class="img-fluid" alt="" />
                 <h3>Min-Max Scaler</h3>
-                <p>Berikut ini deskripsi fungsi Min-Max Scaler</p>
+                <p>Min-Max Scaler merupakan metode normalisasi yang mengubah sebuah kumpulan data menjadi
+                  skala mulai dari 0 hingga 1, di mana nilai minimum dan maksimum dari data
+                  diambil, dan setiap nilai diubah menggunakan rumus yang sesuai.</p>
               </div>
             </div>
 
@@ -111,7 +113,11 @@
               <div class="box">
                 <img src="{% static 'assetss/img/values-2.png' %}" class="img-fluid" alt="" />
                 <h3>SMOTE</h3>
-                <p>Berikut ini deskripsi fungsi SMOTE</p>
+                <p>SMOTE (Synthetic Minority Oversampling Technique) merupakan salah
+                  satu teknik yang digunakan untuk mengatasi permasalahan Class Imbalance
+                  Problem. SMOTE bekerja dengan memodifikasi dataset yang tidak
+                  seimbang menjadi seimbang dengan cara membuat data sintetik baru dari kelas
+                  minoritas (Perwara et al., 2020).</p>
               </div>
             </div>
 
@@ -119,7 +125,10 @@
               <div class="box">
                 <img src="{% static 'assetss/img/values-3.png' %}" class="img-fluid" alt="" />
                 <h3>C4.5</h3>
-                <p>Berikut ini deskripsi fungsi C4.5</p>
+                <p>Algoritma C4.5 merupakan algoritma yang digunakan untuk membentuk
+                  pohon keputusan (Decision Tree). Pohon keputusan berguna untuk
+                  mengeksplorasi data, menemukan hubungan tersembunyi antara sejumlah calon
+                  variabel input dengan sebuah variabel target (Rianto, 2022)</p>
               </div>
             </div>
           </div>
@@ -142,9 +151,6 @@
                   <a class="nav-link active" data-bs-toggle="pill" href="#tab1">Tentang Sistem</a>
                 </li>
                 <li>
-                  <a class="nav-link" data-bs-toggle="pill" href="#tab2">Fungsi</a>
-                </li>
-                <li>
                   <a class="nav-link" data-bs-toggle="pill" href="#tab3">Tujuan</a>
                 </li>
               </ul>
@@ -153,30 +159,31 @@
               <!-- Tab Content -->
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab1">
-                  <p>Sistem ini dibuat untuk mengklasifikasikan kualitas padi organik</p>
+                  <p>Website ini merupakan website untuk program aplikasi klasifikasi kualitas mutu padi organik untuk menyelesaikan skripsi
+                  </p>
                   </div>
                 <!-- End Tab 1 Content -->
-
-                <div class="tab-pane fade show" id="tab2">
-                  <div class="d-flex align-items-center mb-2">
-                    <i class="bi bi-check2"></i>
-                    <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
-                  </div>
-                  <div class="d-flex align-items-center mb-2">
-                    <i class="bi bi-check2"></i>
-                    <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                  </div>
-                  </div>
-                <!-- End Tab 2 Content -->
 
                 <div class="tab-pane fade show" id="tab3">
                   <div class="d-flex align-items-center mb-2">
                     <i class="bi bi-check2"></i>
-                    <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
+                    <h4>Mengetahui proses implementasi min-max scaler pada algoritma C4.5 dalam
+                      melakukan proses klasifikasi untuk kualitas mutu padi organik.</h4>
                   </div>
                   <div class="d-flex align-items-center mb-2">
                     <i class="bi bi-check2"></i>
-                    <h4>Incidunt non veritatis illum ea ut nisi</h4>
+                    <h4>Mengetahui proses SMOTE pada algoritma C4.5 dalam melakukan proses
+                      klasifikasi untuk kualitas mutu padi organik</h4>
+                  </div>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Mengetahui cara membangun program berbasis website dengan Django untuk
+                      klasifikasi kualitas mutu padi organik menggunakan model algoritma C4.5</h4>
+                  </div>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Mengetahui nilai akurasi, recall, dan precision yang didapat dari model
+                      klasifikasi dengan algoritma C4.5.</h4>
                   </div>
                 </div>
                 <!-- End Tab 3 Content -->
@@ -203,8 +210,7 @@
               <div class="service-box blue">
                 <i class="ri-discuss-line icon"></i>
                 <h3>Varietas</h3>
-                <p>Deskripsi variabel</p>
-                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+                <p>Jenis verietas dari padi yang ditanam</p>
               </div>
             </div>
 
@@ -212,69 +218,61 @@
               <div class="service-box orange">
                 <i class="ri-discuss-line icon"></i>
                 <h3>PH</h3>
-                <p>Deskripsi PH</p>
-                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-              </div>
+                <p>Nilai kadar PH (Potential of Hydrogen) tanah pada padi</p>
+                </div>
             </div>
 
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
               <div class="service-box green">
                 <i class="ri-discuss-line icon"></i>
                 <h3>Boron</h3>
-                <p>Deskripsi Boron</p>
-                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-              </div>
+                <p>Nilai kadar boron tanah pada padi</p>
+                </div>
             </div>
 
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
               <div class="service-box red">
                 <i class="ri-discuss-line icon"></i>
                 <h3>Warna</h3>
-                <p>Deskripsi Warna</p>
-                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-              </div>
+                <p>Warna beras yang dihasilkan oleh padi organik</p>
+                </div>
             </div>
 
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
               <div class="service-box purple">
                 <i class="ri-discuss-line icon"></i>
                 <h3>Rasa</h3>
-                <p>Deskripsi Rasa</p>
-                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-              </div>
+                <p>Rasa yang dihasilkan pada beras oleh padi organik</p>
+                </div>
             </div>
 
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
               <div class="service-box pink">
                 <i class="ri-discuss-line icon"></i>
                 <h3>Teknik</h3>
-                <p>Deskripsi Teknik</p>
-                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-              </div>
+                <p>Jenis teknik menanam padi organik oleh petani</p>
+                </div>
             </div>
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
               <div class="service-box purple">
                 <i class="ri-discuss-line icon"></i>
                 <h3>Musim</h3>
-                <p>Deskripsi Musim</p>
-                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-              </div>
+                <p>Jenis musim saat penanaman padi organik</p>
+                </div>
             </div>
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
               <div class="service-box red">
                 <i class="ri-discuss-line icon"></i>
                 <h3>Penyakit</h3>
-                <p>Deskripsi Penyakit</p>
-                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-              </div>
+                <p>Penyakit yang di dapat oleh padi organik saat masa penanaman</p>
+                </div>
             </div>
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
               <div class="service-box blue">
                 <i class="ri-discuss-line icon"></i>
-                <h3>Phospor</h3>
-                <p>Deskripsi Phospor</p>
-                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-              </div>
+                <h3>Fosfor</h3>
+                <p>Nilai kadar fosfor pada kandungan tanah padi organik</p>
+                </div>
             </div>
           </div>
         </div>
@@ -385,49 +383,95 @@
               <!-- Index(['Varietas', 'Warna', 'rasa', 'teknik', 'Musim', 'Penyakit',
        'Kategori_Boron', 'Kategori_Fosfor', 'Kategori_PH', 'Grade_mutu'],
       dtype='object') -->
-              <form action="forms/contact.php" method="post" class="php-email-form">
+              <form action="/prediction-guest" method="post" class="php-email-form">
                 <div class="row gy-4">
                   <div class="col-md-6">
-                    <input type="text" name="Varietas" class="form-control" placeholder="Varietas" required />
+                    <select name="Varietas" id="Varietas" class="form-control" required>
+                      <option hidden>Pilih Varietas</option>
+                      <option value="0">Beras Hitam</option>
+                      <option value="3">Ciheran</option>
+                      <option value="2">IR 64</option>
+                      <option value="4">Mi Kongga</option>
+                      <option value="1">Beras Merah</option>
+                      <option value="5">Pandan Wangi</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <select name="Warna" id="Warna" class="form-control" required>
+                      <option hidden>Pilih Warna</option>
+                      <option value="2">Merah</option>
+                      <option value="3">Putih</option>
+                      <option value="0">Coklat</option>
+                      <option value="1">Hitam</option>
+                    </select>
                   </div>
 
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="Warna" placeholder="Warna" required />
+                    <select name="rasa" id="rasa" class="form-control" required>
+                      <option hidden>Pilih Rasa</option>
+                      <option value="0">Pulen</option>
+                      <option value="1">Sangat Pulen</option>
+                    </select>
                   </div>
 
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="rasa" placeholder="rasa" required />
+                    <select name="Musim" id="Musim" class="form-control" required>
+                      <option hidden>Pilih Musim</option>
+                      <option value="0">Hujan</option>
+                      <option value="1">Kemarau</option>
+                    </select>                  
                   </div>
 
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="teknik" placeholder="teknik" required />
+                    <select name="Penyakit" id="Penyakit" class="form-control" required>
+                      <option hidden>Pilih Penyakit</option>
+                      <option value="0">Burung</option>
+                      <option value="1">Penggerek Batang</option>
+                      <option value="2">Tikus</option>
+                      <option value="3">Wereng Hijau</option>
+                      <option value="4">Wereng Coklat</option>
+                    </select>                  
                   </div>
 
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="Musim" placeholder="Musim" required />
+                    <select name="teknik" id="teknik" class="form-control" required>
+                      <option hidden>Pilih Teknik</option>
+                      <option value="0">Jajar Legowo</option>
+                      <option value="1">SRI</option>
+                    </select>                   
                   </div>
 
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="Penyakit" placeholder="Penyakit" required />
+                    <select name="PH" id="PH" class="form-control" required>
+                      <option hidden>Pilih PH</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>                     
                   </div>
 
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="Kategori_Boron" placeholder="Kategori_Boron" required />
+                    <input type="number" class="form-control" id="boron" name="boron" placeholder="Masukkan nilai boron" step="any" required />
                   </div>
 
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="Kategori_Fosfor" placeholder="Kategori_Fosfor" required />
+                    <input type="number" class="form-control" name="fosfor" placeholder="Masukkan nilai fosfor" step="any" required />
                   </div>
 
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="Kategori_PH" placeholder="Kategori_PH" required />
+                  <div class="col-md-12">
+                    <div id="hasil-klasifikasi" class="alert alert-danger" role="alert" style="display: none;">
+                      <strong>Hasil Klasifikasi: {{ prediction }}</strong>
+                      <span id="grade-mutu"></span>
+                    </div>
                   </div>
+                  
                   <div class="col-md-12 text-center">
                     <div class="loading">Loading</div>
                     <div class="error-message"></div>
                     <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                    <button type="submit">Send Message</button>
+                    <button name="predict" type="submit">Klasifikasikan</button>
                   </div>
                 </div>
               </form>
