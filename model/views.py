@@ -11,7 +11,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score, confusion_matrix as sk_confusion_matrix
 from sklearn.model_selection import cross_val_score
 from django.utils.encoding import smart_str
-
+from django.contrib.auth.decorators import login_required
+import logging
 import numpy as np
 import pickle
 import pandas as pd
@@ -21,6 +22,7 @@ import seaborn as sns
 import io
 import urllib, base64
 
+logger = logging.getLogger(__name__)
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -188,6 +190,7 @@ class Preprocessing_read_csv:
         df = pd.read_csv(file_path)
         return df
     
+@login_required(login_url='login')
 def training(request):
     x_train_r_03 = Preprocessing_read_csv().x_train_r_03()
     y_train_r_03 = Preprocessing_read_csv().y_train_r_03()
@@ -237,7 +240,8 @@ def training(request):
         return render(request, 'result.html', {
             'title' : title
         })
-
+    
+@login_required(login_url='login')
 def testing(request):
     if 'test' in request.POST:
         model_r03 = pickle.load(open('model_r03.pkl', 'rb'))
@@ -328,6 +332,7 @@ def testing(request):
             'rec_score_cross_val_m03': rec_score_cross_val_m03,
             'rec_score_cross_val_m04': rec_score_cross_val_m04
         })
+@login_required(login_url='login')
 def dataset(request):
     preprocessing = Preprocessing_read_csv()
     df = preprocessing.read_data()
@@ -344,6 +349,7 @@ def dataset(request):
         'title': title
         })
 
+@login_required(login_url='login')
 def read_smote_data(request):
     read_csv = Preprocessing_read_csv()
     title = "Dataset SMOTE"
@@ -370,6 +376,7 @@ def read_smote_data(request):
         'title': title
     })
 
+@login_required(login_url='login')
 def read_real_data(request):
     read_csv = Preprocessing_read_csv()
     title = "Dataset Labelling"
@@ -395,15 +402,17 @@ def read_real_data(request):
         'total_data': total_data,
         'title': title
     })
-def data_smote(request):
-    return render(request, 'data-smote.html')
+# def data_smote(request):
+#     return render(request, 'data-smote.html')
 
+@login_required(login_url='login')
 def classification(request):
     title = "Klasifikasi"
     return render(request, 'klasifikasi.html', {
         'title': title
     })
 
+@login_required(login_url='login')
 def prediction(request):
         # Mapping dictionaries
     varietas_mapping = {
@@ -602,24 +611,28 @@ def prediction_real_for_guest(request):
 def index(request):
     return render(request, 'index.html')
 
+@login_required(login_url='login')
 def adminIndex(request):
     title = "Dashboard"
     return render(request, 'admin-index.html', {
         'title': title
     })
 
+@login_required(login_url='login')
 def result(request):
     title = "Result Page"
     return render(request, 'result.html', {
         'title' : title
     })
 
+@login_required(login_url='login')
 def excel(request):
     return render(request, 'excel.html')
 
 def excelCoba(request):
     return render(request, 'excel-coba.html')
 
+@login_required(login_url='login')
 def excelPrediction(request):
     varietas_mapping = {
         "Beras Hitam": 0.0, 
@@ -735,6 +748,7 @@ def excelPrediction(request):
 
     return render(request, 'excel.html')
 
+@login_required(login_url='login')
 def download_csv(request):
     file_path = os.path.join(settings.BASE_DIR, 'model/data/format-import-excel.csv')
     if os.path.exists(file_path):
