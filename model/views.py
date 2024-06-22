@@ -196,25 +196,26 @@ def training(request):
     y_train_r_03 = Preprocessing_read_csv().y_train_r_03()
     x_train_r_04 = Preprocessing_read_csv().x_train_r_04()
     y_train_r_04 = Preprocessing_read_csv().y_train_r_04()
-    # x_train_r_05 = Preprocessing_read_csv().x_train_r_05()
-    # y_train_r_05 = Preprocessing_read_csv().y_train_r_05()
+    x_train_r_05 = Preprocessing_read_csv().x_train_r_05()
+    y_train_r_05 = Preprocessing_read_csv().y_train_r_05()
+
     x_train_m_03 = Preprocessing_read_csv().x_train_m_03()
     y_train_m_03 = Preprocessing_read_csv().y_train_m_03()
     x_train_m_04 = Preprocessing_read_csv().x_train_m_04()
     y_train_m_04 = Preprocessing_read_csv().y_train_m_04()
-    # x_train_m_05 = Preprocessing_read_csv().x_train_m_05()
-    # y_train_m_05 = Preprocessing_read_csv().y_train_m_05()
+    x_train_m_05 = Preprocessing_read_csv().x_train_m_05()
+    y_train_m_05 = Preprocessing_read_csv().y_train_m_05()
 
     if 'train' in request.POST:
         clf = DecisionTreeClassifier()
         # grid_search_r03 = DecisionTreeClassifier().fit(x_train_r_03, y_train_r_03)
         # grid_search_r04 = DecisionTreeClassifier().fit(x_train_r_04, y_train_r_04)
-        # # grid_search_r05 = DecisionTreeClassifier().fit(x_train_r_05, y_train_r_05)
-        grid_search_r03 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_r_03, y_train_r_03)
-        grid_search_r04 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_r_04, y_train_r_04)
+        # grid_search_r05 = DecisionTreeClassifier().fit(x_train_r_05, y_train_r_05)
+        # grid_search_r03 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_r_03, y_train_r_03)
+        # grid_search_r04 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_r_04, y_train_r_04)
         # grid_search_r05 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_r_03, y_train_r_03)
-        grid_search_m03 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_m_03, y_train_m_03)
-        grid_search_m04 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_m_04, y_train_m_04)
+        # grid_search_m03 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_m_03, y_train_m_03)
+        # grid_search_m04 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_m_04, y_train_m_04)
         # grid_search_m05 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_m_05, y_train_m_05)
 
         # best_model_m03 = grid_search_m03.best_estimator_
@@ -225,15 +226,18 @@ def training(request):
 
         best_model_m03 = DecisionTreeClassifier().fit(x_train_m_03, y_train_m_03)
         best_model_m04 = DecisionTreeClassifier().fit(x_train_m_04, y_train_m_04)
+        best_model_m05 = DecisionTreeClassifier().fit(x_train_m_05, y_train_m_05)
+
         best_model_r03 = DecisionTreeClassifier().fit(x_train_r_03, y_train_r_03)
         best_model_r04 = DecisionTreeClassifier().fit(x_train_r_04, y_train_r_04)
+        best_model_r05 = DecisionTreeClassifier().fit(x_train_r_05, y_train_r_05)
         
         pickle.dump(best_model_r03, open('model_r03.pkl', 'wb'))
         pickle.dump(best_model_r04, open('model_r04.pkl', 'wb'))
-        # pickle.dump(grid_search_r05, open('model_r05.pkl', 'wb'))
+        pickle.dump(best_model_r05, open('model_r05.pkl', 'wb'))
         pickle.dump(best_model_m03, open('model_m03.pkl', 'wb'))
         pickle.dump(best_model_m04, open('model_m04.pkl', 'wb'))
-        # pickle.dump(best_model_m05, open('model_m05.pkl', 'wb'))
+        pickle.dump(best_model_m05, open('model_m05.pkl', 'wb'))
 
         title = "Training Page"
         messages.success(request, 'Model berhasil di pickle!')
@@ -246,43 +250,60 @@ def testing(request):
     if 'test' in request.POST:
         model_r03 = pickle.load(open('model_r03.pkl', 'rb'))
         model_r04 = pickle.load(open('model_r04.pkl', 'rb'))
+        model_r05 = pickle.load(open('model_r05.pkl', 'rb'))
+
         model_m03 = pickle.load(open('model_m03.pkl', 'rb'))
         model_m04 = pickle.load(open('model_m04.pkl', 'rb'))
+        model_m05 = pickle.load(open('model_m05.pkl', 'rb'))
 
         y_pred_r03 = model_r03.predict(Preprocessing_read_csv().x_test_r_03())
         y_pred_r04 = model_r04.predict(Preprocessing_read_csv().x_test_r_04())
+        y_pred_r05 = model_r05.predict(Preprocessing_read_csv().x_test_r_05())
         y_pred_m03 = model_m03.predict(Preprocessing_read_csv().x_test_m_03())
         y_pred_m04 = model_m04.predict(Preprocessing_read_csv().x_test_m_04())
+        y_pred_m05 = model_m05.predict(Preprocessing_read_csv().x_test_m_05())
 
         y_pred_train_r03 = model_r03.predict(Preprocessing_read_csv().x_train_r_03())
         y_pred_train_r04 = model_r04.predict(Preprocessing_read_csv().x_train_r_04())
+        y_pred_train_r05 = model_r05.predict(Preprocessing_read_csv().x_train_r_05())
         y_pred_train_m03 = model_m03.predict(Preprocessing_read_csv().x_train_m_03())
         y_pred_train_m04 = model_m04.predict(Preprocessing_read_csv().x_train_m_04())
+        y_pred_train_m05 = model_m05.predict(Preprocessing_read_csv().x_train_m_05())
 
         acc_r03 = accuracy_score(Preprocessing_read_csv().y_test_r_03(), y_pred_r03)
         acc_r04 = accuracy_score(Preprocessing_read_csv().y_test_r_04(), y_pred_r04)
+        acc_r05 = accuracy_score(Preprocessing_read_csv().y_test_r_05(), y_pred_r05)
         acc_m03 = accuracy_score(Preprocessing_read_csv().y_test_m_03(), y_pred_m03)
         acc_m04 = accuracy_score(Preprocessing_read_csv().y_test_m_04(), y_pred_m04)
+        acc_m05 = accuracy_score(Preprocessing_read_csv().y_test_m_05(), y_pred_m05)
 
         rec_r03 = recall_score(Preprocessing_read_csv().y_test_r_03(), y_pred_r03, average='weighted')
         rec_r04 = recall_score(Preprocessing_read_csv().y_test_r_04(), y_pred_r04, average='weighted')
+        rec_r05 = recall_score(Preprocessing_read_csv().y_test_r_05(), y_pred_r05, average='weighted')
         rec_m03 = recall_score(Preprocessing_read_csv().y_test_m_03(), y_pred_m03, average='weighted')
         rec_m04 = recall_score(Preprocessing_read_csv().y_test_m_04(), y_pred_m04, average='weighted')
+        rec_m05 = recall_score(Preprocessing_read_csv().y_test_m_05(), y_pred_m05, average='weighted')
 
         prec_r03 = precision_score(Preprocessing_read_csv().y_test_r_03(), y_pred_r03, average='weighted')
         prec_r04 = precision_score(Preprocessing_read_csv().y_test_r_04(), y_pred_r04, average='weighted')
+        prec_r05 = precision_score(Preprocessing_read_csv().y_test_r_05(), y_pred_r05, average='weighted')
         prec_m03 = precision_score(Preprocessing_read_csv().y_test_m_03(), y_pred_m03, average='weighted')
         prec_m04 = precision_score(Preprocessing_read_csv().y_test_m_04(), y_pred_m04, average='weighted')
+        prec_m05 = precision_score(Preprocessing_read_csv().y_test_m_05(), y_pred_m05, average='weighted')
 
         train_acc_r03 = accuracy_score(Preprocessing_read_csv().y_train_r_03(), y_pred_train_r03)
         train_acc_r04 = accuracy_score(Preprocessing_read_csv().y_train_r_04(), y_pred_train_r04)
+        train_acc_r05 = accuracy_score(Preprocessing_read_csv().y_train_r_05(), y_pred_train_r05)
         train_acc_m03 = accuracy_score(Preprocessing_read_csv().y_train_m_03(), y_pred_train_m03)
         train_acc_m04 = accuracy_score(Preprocessing_read_csv().y_train_m_04(), y_pred_train_m04)
+        train_acc_m05 = accuracy_score(Preprocessing_read_csv().y_train_m_05(), y_pred_train_m05)
 
         overfitting_score_r03 = train_acc_r03 - acc_r03
         overfitting_score_r04 = train_acc_r04 - acc_r04
+        overfitting_score_r05 = train_acc_r05 - acc_r05
         overfitting_score_m03 = train_acc_m03 - acc_m03
         overfitting_score_m04 = train_acc_m04 - acc_m04
+        overfitting_score_m05 = train_acc_m05 - acc_m05
 
         acc_score_cross_val_r03 = cross_val_score(model_r03, Preprocessing_read_csv().x_train_r_03(), Preprocessing_read_csv().y_train_r_03(), cv=10, scoring='accuracy').mean()
         prec_score_cross_val_r03 = cross_val_score(model_r03, Preprocessing_read_csv().x_train_r_03(), Preprocessing_read_csv().y_train_r_03(), cv=10, scoring='precision_weighted').mean()
@@ -292,6 +313,10 @@ def testing(request):
         prec_score_cross_val_r04 = cross_val_score(model_r04, Preprocessing_read_csv().x_train_r_04(), Preprocessing_read_csv().y_train_r_04(), cv=10, scoring='precision_weighted').mean()
         rec_score_cross_val_r04 = cross_val_score(model_r04, Preprocessing_read_csv().x_train_r_04(), Preprocessing_read_csv().y_train_r_04(), cv=10, scoring='recall_weighted').mean()
 
+        acc_score_cross_val_r05 = cross_val_score(model_r05, Preprocessing_read_csv().x_train_r_05(), Preprocessing_read_csv().y_train_r_05(), cv=10, scoring='accuracy').mean()
+        prec_score_cross_val_r05 = cross_val_score(model_r05, Preprocessing_read_csv().x_train_r_05(), Preprocessing_read_csv().y_train_r_05(), cv=10, scoring='precision_weighted').mean()
+        rec_score_cross_val_r05 = cross_val_score(model_r05, Preprocessing_read_csv().x_train_r_05(), Preprocessing_read_csv().y_train_r_05(), cv=10, scoring='recall_weighted').mean()
+
         acc_score_cross_val_m03 = cross_val_score(model_m03, Preprocessing_read_csv().x_train_m_03(), Preprocessing_read_csv().y_train_m_03(), cv=10, scoring='accuracy').mean()
         prec_score_cross_val_m03 = cross_val_score(model_m03, Preprocessing_read_csv().x_train_m_03(), Preprocessing_read_csv().y_train_m_03(), cv=10, scoring='precision_weighted').mean()
         rec_score_cross_val_m03 = cross_val_score(model_m03, Preprocessing_read_csv().x_train_m_03(), Preprocessing_read_csv().y_train_m_03(), cv=10, scoring='recall_weighted').mean()
@@ -300,38 +325,71 @@ def testing(request):
         prec_score_cross_val_m04 = cross_val_score(model_m04, Preprocessing_read_csv().x_train_m_04(), Preprocessing_read_csv().y_train_m_04(), cv=10, scoring='precision_weighted').mean()
         rec_score_cross_val_m04 = cross_val_score(model_m04, Preprocessing_read_csv().x_train_m_04(), Preprocessing_read_csv().y_train_m_04(), cv=10, scoring='recall_weighted').mean()
 
+        acc_score_cross_val_m05 = cross_val_score(model_m05, Preprocessing_read_csv().x_train_m_05(), Preprocessing_read_csv().y_train_m_05(), cv=10, scoring='accuracy').mean()
+        prec_score_cross_val_m05 = cross_val_score(model_m05, Preprocessing_read_csv().x_train_m_05(), Preprocessing_read_csv().y_train_m_05(), cv=10, scoring='precision_weighted').mean()
+        rec_score_cross_val_m05 = cross_val_score(model_m05, Preprocessing_read_csv().x_train_m_05(), Preprocessing_read_csv().y_train_m_05(), cv=10, scoring='recall_weighted').mean()
+
         title = "Testing Page"
         return render(request, 'result.html', {
             'title' : title,
             'acc_r03': acc_r03,
             'acc_r04': acc_r04,
+            'acc_r05': acc_r05,
+
             'acc_m03': acc_m03,
             'acc_m04': acc_m04,
+            'acc_m05': acc_m05,
+
             'rec_r03': rec_r03,
             'rec_r04': rec_r04,
+            'rec_r05': rec_r05,
+
             'rec_m03': rec_m03,
             'rec_m04': rec_m04,
+            'rec_m05': rec_m05,
+
             'prec_r03': prec_r03,
             'prec_r04': prec_r04,
+            'prec_r05': prec_r05,
+
             'prec_m03': prec_m03,
             'prec_m04': prec_m04,
+            'prec_m05': prec_m05,
+
             'overfitting_score_r03': overfitting_score_r03,
             'overfitting_score_r04': overfitting_score_r04,
+            'overfitting_score_r05': overfitting_score_r05,
+
             'overfitting_score_m03': overfitting_score_m03,
             'overfitting_score_m04': overfitting_score_m04,
+            'overfitting_score_m05': overfitting_score_m05,
+
             'acc_score_cross_val_r03': acc_score_cross_val_r03,
             'acc_score_cross_val_r04': acc_score_cross_val_r04,
+            'acc_score_cross_val_r05': acc_score_cross_val_r05,
+
             'acc_score_cross_val_m03': acc_score_cross_val_m03,
             'acc_score_cross_val_m04': acc_score_cross_val_m04,
+            'acc_score_cross_val_m05': acc_score_cross_val_m05,
+
             'prec_score_cross_val_r03': prec_score_cross_val_r03,
             'prec_score_cross_val_r04': prec_score_cross_val_r04,
+            'prec_score_cross_val_r05': prec_score_cross_val_r05,
+
             'prec_score_cross_val_m03': prec_score_cross_val_m03,
             'prec_score_cross_val_m04': prec_score_cross_val_m04,
+            'prec_score_cross_val_m05': prec_score_cross_val_m05,
+
             'rec_score_cross_val_r03': rec_score_cross_val_r03,
             'rec_score_cross_val_r04': rec_score_cross_val_r04,
+            'rec_score_cross_val_r05': rec_score_cross_val_r05,
+
             'rec_score_cross_val_m03': rec_score_cross_val_m03,
-            'rec_score_cross_val_m04': rec_score_cross_val_m04
+            'rec_score_cross_val_m04': rec_score_cross_val_m04,
+            'rec_score_cross_val_m05': rec_score_cross_val_m05
+
         })
+    
 @login_required(login_url='login')
 def dataset(request):
     preprocessing = Preprocessing_read_csv()
