@@ -8,10 +8,11 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score, confusion_matrix as sk_confusion_matrix
+from sklearn.metrics import confusion_matrix as sk_confusion_matrix ,accuracy_score, recall_score, precision_score, f1_score, confusion_matrix as sk_confusion_matrix
 from sklearn.model_selection import cross_val_score
 from django.utils.encoding import smart_str
 from django.contrib.auth.decorators import login_required
+
 import logging
 import numpy as np
 import pickle
@@ -207,7 +208,7 @@ def training(request):
     y_train_m_05 = Preprocessing_read_csv().y_train_m_05()
 
     if 'train' in request.POST:
-        clf = DecisionTreeClassifier()
+        # clf = DecisionTreeClassifier()
         # grid_search_r03 = DecisionTreeClassifier().fit(x_train_r_03, y_train_r_03)
         # grid_search_r04 = DecisionTreeClassifier().fit(x_train_r_04, y_train_r_04)
         # grid_search_r05 = DecisionTreeClassifier().fit(x_train_r_05, y_train_r_05)
@@ -242,7 +243,8 @@ def training(request):
         title = "Training Page"
         messages.success(request, 'Model berhasil di pickle!')
         return render(request, 'result.html', {
-            'title' : title
+            'title' : title,
+            'success_message' : 'Data berhasil dilatih dan berhasil membuat model!'
         })
     
 @login_required(login_url='login')
@@ -329,8 +331,41 @@ def testing(request):
         prec_score_cross_val_m05 = cross_val_score(model_m05, Preprocessing_read_csv().x_train_m_05(), Preprocessing_read_csv().y_train_m_05(), cv=10, scoring='precision_weighted').mean()
         rec_score_cross_val_m05 = cross_val_score(model_m05, Preprocessing_read_csv().x_train_m_05(), Preprocessing_read_csv().y_train_m_05(), cv=10, scoring='recall_weighted').mean()
 
+        # Compute confusion matrices
+        cm_r03 = sk_confusion_matrix(Preprocessing_read_csv().y_test_r_03(), y_pred_r03)
+        cm_r04 = sk_confusion_matrix(Preprocessing_read_csv().y_test_r_04(), y_pred_r04)
+        cm_r05 = sk_confusion_matrix(Preprocessing_read_csv().y_test_r_05(), y_pred_r05)
+        cm_m03 = sk_confusion_matrix(Preprocessing_read_csv().y_test_m_03(), y_pred_m03)
+        cm_m04 = sk_confusion_matrix(Preprocessing_read_csv().y_test_m_04(), y_pred_m04)
+        cm_m05 = sk_confusion_matrix(Preprocessing_read_csv().y_test_m_05(), y_pred_m05)
+        
+        def plot_confusion_matrix(cm, title):
+            plt.figure(figsize=(10,7))
+            sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+            plt.title(title)
+            plt.ylabel('Actual')
+            plt.xlabel('Predicted')
+
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png')
+            buf.seek(0)
+
+            string = base64.b64encode(buf.read()).decode('utf-8')
+            uri = 'data:image/png;base64,' + urllib.parse.quote(string)
+            buf.close()
+            plt.close()
+            return uri
+        
+        cm_r03_image = plot_confusion_matrix(cm_r03, 'Confusion Matrix for R03')
+        cm_r04_image = plot_confusion_matrix(cm_r04, 'Confusion Matrix for R04')
+        cm_r05_image = plot_confusion_matrix(cm_r05, 'Confusion Matrix for R05')
+        cm_m03_image = plot_confusion_matrix(cm_m03, 'Confusion Matrix for M03')
+        cm_m04_image = plot_confusion_matrix(cm_m04, 'Confusion Matrix for M04')
+        cm_m05_image = plot_confusion_matrix(cm_m05, 'Confusion Matrix for M05')
+
+
         title = "Testing Page"
-        return render(request, 'result.html', {
+        return render(request, 'testing.html', {
             'title' : title,
             'acc_r03': acc_r03,
             'acc_r04': acc_r04,
@@ -386,8 +421,14 @@ def testing(request):
 
             'rec_score_cross_val_m03': rec_score_cross_val_m03,
             'rec_score_cross_val_m04': rec_score_cross_val_m04,
-            'rec_score_cross_val_m05': rec_score_cross_val_m05
+            'rec_score_cross_val_m05': rec_score_cross_val_m05,
 
+            'cm_r03_image': cm_r03_image,
+            'cm_r04_image': cm_r04_image,
+            'cm_r05_image': cm_r05_image,
+            'cm_m03_image': cm_m03_image,
+            'cm_m04_image': cm_m04_image,
+            'cm_m05_image': cm_m05_image,
         })
     
 @login_required(login_url='login')

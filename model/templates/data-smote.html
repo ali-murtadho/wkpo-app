@@ -44,6 +44,12 @@ License: For each use you must have a valid license purchased only from above li
     <link href="{% static 'assets/css/style.bundle.css' %}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
   </head>
+  <style>
+    .table-scrollable {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch; /* Untuk mendukung scroll halus di perangkat mobile */
+    }
+  </style>
   <!--end::Head-->
   <!--begin::Body-->
   <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-disabled">
@@ -472,64 +478,46 @@ License: For each use you must have a valid license purchased only from above li
                       <div class="tab-content">
                         <!--begin::Tab panel-->
                         <div class="tab-pane fade active show" role="tabpanel">
-                          <!--begin::Container-->
-                          <div class="pt-2">
-                            <!--begin::Tabs-->
-                            <div class="d-flex align-items-center pb-9 px-9">
-                              <!--begin::Card body-->
-                              <div class="card-body pt-0 pb-5">
-                                <!--begin::Table-->
-                                <table class="table align-middle table-row-dashed gy-5" id="kt_table_customers_payment">
-                                  <!--begin::Table head-->
-                                  <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
-                                    <!--begin::Table row-->
-                                    <tr class="text-start text-muted text-uppercase gs-0">
-                                      <th>No</th>
-                                      {% for column in train_columns %}
-                                      <th>{{ column }}</th>
-                                      {% endfor %}
-                                    </tr>
-                                    <!--end::Table row-->
-                                  </thead>
-                                  <!--end::Table head-->
-                                  {% load custom_filters %}
-                                  <!--begin::Table body-->
-                                  <tbody class="fs-6 fw-bold text-gray-600">
-                                    <!--begin::Table row-->
-                                    {% for index, row in train_data|add_index %}
-                                    <tr>
-                                      <td>{{ index }}</td>
-                                      {% for column in train_columns %}
-                                      <td>{{ row|get_item:column }}</td>
-                                      <!-- Accessing dictionary elements directly -->
-                                      {% endfor %}
-                                    </tr>
+                          <!--begin::Tabs-->
+                          <div class="d-flex align-items-center pb-9 px-9">
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0 pb-5">
+                              <!--begin::Table-->
+                              <table class="table align-middle table-row-dashed gy-5" id="kt_table_customers_payment">
+                                <!--begin::Table head-->
+                                <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
+                                  <!--begin::Table row-->
+                                  <tr class="text-start text-muted text-uppercase gs-0">
+                                    <th>No</th>
+                                    {% for column in train_columns %}
+                                    <th>{{ column }}</th>
                                     {% endfor %}
-                                    <!--end::Table row-->
-                                  </tbody>
-                                  <!--end::Table body-->
-                                </table>
-                                <!--end::Table-->
-                              </div>
-                              <!--end::Card body-->
+                                  </tr>
+                                  <!--end::Table row-->
+                                </thead>
+                                <!--end::Table head-->
+                                {% load custom_filters %}
+                                <!--begin::Table body-->
+                                <tbody class="fs-6 fw-bold text-gray-600">
+                                  <!--begin::Table row-->
+                                  {% for index, row in train_data|add_index %}
+                                  <tr>
+                                    <td>{{ index }}</td>
+                                    {% for column in train_columns %}
+                                    <td>{{ row|get_item:column }}</td>
+                                    <!-- Accessing dictionary elements directly -->
+                                    {% endfor %}
+                                  </tr>
+                                  {% endfor %}
+                                  <!--end::Table row-->
+                                </tbody>
+                                <!--end::Table body-->
+                              </table>
+                              <!--end::Table-->
                             </div>
-                            <!--end::Tabs-->
-                            <!--begin::Tab content-->
-                            <div class="tab-content">
-                              <div class="tab-pane fade active show" id="kt_security_summary_tab_pane_day_agents" role="tabpanel">
-                                <!--begin::Chart-->
-                                <div id="kt_security_summary_chart_day_agents" style="height: 300px"></div>
-                                <!--end::Chart-->
-                              </div>
-                              <div class="tab-pane fade" id="kt_security_summary_tab_pane_day_clients" role="tabpanel">
-                                <!--begin::Chart-->
-                                <div id="kt_security_summary_chart_day_clients" style="height: 300px"></div>
-                                <!--end::Chart-->
-                              </div>
-                            </div>
-                            <!--end::Tab content-->
+                            <!--end::Card body-->
                           </div>
-                          <!--end::Container-->
+                          <!--end::Tabs-->
                         </div>
                         <!--end::Tab panel-->
                       </div>
