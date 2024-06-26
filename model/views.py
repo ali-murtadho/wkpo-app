@@ -3,15 +3,14 @@ from django.http import HttpResponse
 from django.shortcuts import render, render, redirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from sklearn.model_selection import train_test_split, GridSearchCV
+from django.utils.encoding import smart_str
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import confusion_matrix as sk_confusion_matrix ,accuracy_score, recall_score, precision_score, f1_score, confusion_matrix as sk_confusion_matrix
 from sklearn.model_selection import cross_val_score
-from django.utils.encoding import smart_str
-from django.contrib.auth.decorators import login_required
 
 import logging
 import numpy as np
@@ -24,6 +23,7 @@ import io
 import urllib, base64
 
 logger = logging.getLogger(__name__)
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -63,15 +63,6 @@ def logout_view(request):
     logout(request)
     messages.info(request, "You have successfully logged out.") 
     return redirect('index')
-
-
-# Parameter grid for DecisionTreeClassifier
-param_grid = {
-    'criterion': ['gini', 'entropy'],
-    'max_depth': [None, 10, 20, 30, 40, 50],
-    'min_samples_split': [2, 5, 10],
-    'min_samples_leaf': [1, 2, 4]
-}
 
 class Preprocessing_read_csv:
     def read_data(self):
@@ -192,46 +183,33 @@ class Preprocessing_read_csv:
         return df
     
 @login_required(login_url='login')
-def training(request):
-    x_train_r_03 = Preprocessing_read_csv().x_train_r_03()
-    y_train_r_03 = Preprocessing_read_csv().y_train_r_03()
-    x_train_r_04 = Preprocessing_read_csv().x_train_r_04()
-    y_train_r_04 = Preprocessing_read_csv().y_train_r_04()
-    x_train_r_05 = Preprocessing_read_csv().x_train_r_05()
-    y_train_r_05 = Preprocessing_read_csv().y_train_r_05()
 
-    x_train_m_03 = Preprocessing_read_csv().x_train_m_03()
-    y_train_m_03 = Preprocessing_read_csv().y_train_m_03()
-    x_train_m_04 = Preprocessing_read_csv().x_train_m_04()
-    y_train_m_04 = Preprocessing_read_csv().y_train_m_04()
-    x_train_m_05 = Preprocessing_read_csv().x_train_m_05()
-    y_train_m_05 = Preprocessing_read_csv().y_train_m_05()
+def training(request):
+    read_csv = Preprocessing_read_csv()
+    x_train_r_03 = read_csv.x_train_r_03()
+    y_train_r_03 = read_csv.y_train_r_03()
+    x_train_r_04 = read_csv.x_train_r_04()
+    y_train_r_04 = read_csv.y_train_r_04()
+    x_train_r_05 = read_csv.x_train_r_05()
+    y_train_r_05 = read_csv.y_train_r_05()
+
+    x_train_m_03 = read_csv.x_train_m_03()
+    y_train_m_03 = read_csv.y_train_m_03()
+    x_train_m_04 = read_csv.x_train_m_04()
+    y_train_m_04 = read_csv.y_train_m_04()
+    x_train_m_05 = read_csv.x_train_m_05()
+    y_train_m_05 = read_csv.y_train_m_05()
 
     if 'train' in request.POST:
-        # clf = DecisionTreeClassifier()
-        # grid_search_r03 = DecisionTreeClassifier().fit(x_train_r_03, y_train_r_03)
-        # grid_search_r04 = DecisionTreeClassifier().fit(x_train_r_04, y_train_r_04)
-        # grid_search_r05 = DecisionTreeClassifier().fit(x_train_r_05, y_train_r_05)
-        # grid_search_r03 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_r_03, y_train_r_03)
-        # grid_search_r04 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_r_04, y_train_r_04)
-        # grid_search_r05 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_r_03, y_train_r_03)
-        # grid_search_m03 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_m_03, y_train_m_03)
-        # grid_search_m04 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_m_04, y_train_m_04)
-        # grid_search_m05 = GridSearchCV(estimator=clf, param_grid=param_grid, cv=10).fit(x_train_m_05, y_train_m_05)
+        clf = DecisionTreeClassifier()
 
-        # best_model_m03 = grid_search_m03.best_estimator_
-        # best_model_m04 = grid_search_m04.best_estimator_
-        # best_model_r03 = grid_search_r03.best_estimator_
-        # best_model_r04 = grid_search_r04.best_estimator_
-        # best_model_m05 = grid_search_m05.best_estimator_
+        best_model_m03 = clf.fit(x_train_m_03, y_train_m_03)
+        best_model_m04 = clf.fit(x_train_m_04, y_train_m_04)
+        best_model_m05 = clf.fit(x_train_m_05, y_train_m_05)
 
-        best_model_m03 = DecisionTreeClassifier().fit(x_train_m_03, y_train_m_03)
-        best_model_m04 = DecisionTreeClassifier().fit(x_train_m_04, y_train_m_04)
-        best_model_m05 = DecisionTreeClassifier().fit(x_train_m_05, y_train_m_05)
-
-        best_model_r03 = DecisionTreeClassifier().fit(x_train_r_03, y_train_r_03)
-        best_model_r04 = DecisionTreeClassifier().fit(x_train_r_04, y_train_r_04)
-        best_model_r05 = DecisionTreeClassifier().fit(x_train_r_05, y_train_r_05)
+        best_model_r03 = clf.fit(x_train_r_03, y_train_r_03)
+        best_model_r04 = clf.fit(x_train_r_04, y_train_r_04)
+        best_model_r05 = clf.fit(x_train_r_05, y_train_r_05)
         
         pickle.dump(best_model_r03, open('model_r03.pkl', 'wb'))
         pickle.dump(best_model_r04, open('model_r04.pkl', 'wb'))
@@ -240,15 +218,14 @@ def training(request):
         pickle.dump(best_model_m04, open('model_m04.pkl', 'wb'))
         pickle.dump(best_model_m05, open('model_m05.pkl', 'wb'))
 
-        title = "Training Page"
         messages.success(request, 'Model berhasil di pickle!')
         return render(request, 'result.html', {
-            'title' : title,
             'success_message' : 'Data berhasil dilatih dan berhasil membuat model!'
         })
     
 @login_required(login_url='login')
 def testing(request):
+    read_csv = Preprocessing_read_csv()
     if 'test' in request.POST:
         model_r03 = pickle.load(open('model_r03.pkl', 'rb'))
         model_r04 = pickle.load(open('model_r04.pkl', 'rb'))
@@ -258,47 +235,47 @@ def testing(request):
         model_m04 = pickle.load(open('model_m04.pkl', 'rb'))
         model_m05 = pickle.load(open('model_m05.pkl', 'rb'))
 
-        y_pred_r03 = model_r03.predict(Preprocessing_read_csv().x_test_r_03())
-        y_pred_r04 = model_r04.predict(Preprocessing_read_csv().x_test_r_04())
-        y_pred_r05 = model_r05.predict(Preprocessing_read_csv().x_test_r_05())
-        y_pred_m03 = model_m03.predict(Preprocessing_read_csv().x_test_m_03())
-        y_pred_m04 = model_m04.predict(Preprocessing_read_csv().x_test_m_04())
-        y_pred_m05 = model_m05.predict(Preprocessing_read_csv().x_test_m_05())
+        y_pred_r03 = model_r03.predict(read_csv.x_test_r_03())
+        y_pred_r04 = model_r04.predict(read_csv.x_test_r_04())
+        y_pred_r05 = model_r05.predict(read_csv.x_test_r_05())
+        y_pred_m03 = model_m03.predict(read_csv.x_test_m_03())
+        y_pred_m04 = model_m04.predict(read_csv.x_test_m_04())
+        y_pred_m05 = model_m05.predict(read_csv.x_test_m_05())
 
-        y_pred_train_r03 = model_r03.predict(Preprocessing_read_csv().x_train_r_03())
-        y_pred_train_r04 = model_r04.predict(Preprocessing_read_csv().x_train_r_04())
-        y_pred_train_r05 = model_r05.predict(Preprocessing_read_csv().x_train_r_05())
-        y_pred_train_m03 = model_m03.predict(Preprocessing_read_csv().x_train_m_03())
-        y_pred_train_m04 = model_m04.predict(Preprocessing_read_csv().x_train_m_04())
-        y_pred_train_m05 = model_m05.predict(Preprocessing_read_csv().x_train_m_05())
+        y_pred_train_r03 = model_r03.predict(read_csv.x_train_r_03())
+        y_pred_train_r04 = model_r04.predict(read_csv.x_train_r_04())
+        y_pred_train_r05 = model_r05.predict(read_csv.x_train_r_05())
+        y_pred_train_m03 = model_m03.predict(read_csv.x_train_m_03())
+        y_pred_train_m04 = model_m04.predict(read_csv.x_train_m_04())
+        y_pred_train_m05 = model_m05.predict(read_csv.x_train_m_05())
 
-        acc_r03 = accuracy_score(Preprocessing_read_csv().y_test_r_03(), y_pred_r03)
-        acc_r04 = accuracy_score(Preprocessing_read_csv().y_test_r_04(), y_pred_r04)
-        acc_r05 = accuracy_score(Preprocessing_read_csv().y_test_r_05(), y_pred_r05)
-        acc_m03 = accuracy_score(Preprocessing_read_csv().y_test_m_03(), y_pred_m03)
-        acc_m04 = accuracy_score(Preprocessing_read_csv().y_test_m_04(), y_pred_m04)
-        acc_m05 = accuracy_score(Preprocessing_read_csv().y_test_m_05(), y_pred_m05)
+        acc_r03 = accuracy_score(read_csv.y_test_r_03(), y_pred_r03)
+        acc_r04 = accuracy_score(read_csv.y_test_r_04(), y_pred_r04)
+        acc_r05 = accuracy_score(read_csv.y_test_r_05(), y_pred_r05)
+        acc_m03 = accuracy_score(read_csv.y_test_m_03(), y_pred_m03)
+        acc_m04 = accuracy_score(read_csv.y_test_m_04(), y_pred_m04)
+        acc_m05 = accuracy_score(read_csv.y_test_m_05(), y_pred_m05)
 
-        rec_r03 = recall_score(Preprocessing_read_csv().y_test_r_03(), y_pred_r03, average='weighted')
-        rec_r04 = recall_score(Preprocessing_read_csv().y_test_r_04(), y_pred_r04, average='weighted')
-        rec_r05 = recall_score(Preprocessing_read_csv().y_test_r_05(), y_pred_r05, average='weighted')
-        rec_m03 = recall_score(Preprocessing_read_csv().y_test_m_03(), y_pred_m03, average='weighted')
-        rec_m04 = recall_score(Preprocessing_read_csv().y_test_m_04(), y_pred_m04, average='weighted')
-        rec_m05 = recall_score(Preprocessing_read_csv().y_test_m_05(), y_pred_m05, average='weighted')
+        rec_r03 = recall_score(read_csv.y_test_r_03(), y_pred_r03, average='weighted')
+        rec_r04 = recall_score(read_csv.y_test_r_04(), y_pred_r04, average='weighted')
+        rec_r05 = recall_score(read_csv.y_test_r_05(), y_pred_r05, average='weighted')
+        rec_m03 = recall_score(read_csv.y_test_m_03(), y_pred_m03, average='weighted')
+        rec_m04 = recall_score(read_csv.y_test_m_04(), y_pred_m04, average='weighted')
+        rec_m05 = recall_score(read_csv.y_test_m_05(), y_pred_m05, average='weighted')
 
-        prec_r03 = precision_score(Preprocessing_read_csv().y_test_r_03(), y_pred_r03, average='weighted')
-        prec_r04 = precision_score(Preprocessing_read_csv().y_test_r_04(), y_pred_r04, average='weighted')
-        prec_r05 = precision_score(Preprocessing_read_csv().y_test_r_05(), y_pred_r05, average='weighted')
-        prec_m03 = precision_score(Preprocessing_read_csv().y_test_m_03(), y_pred_m03, average='weighted')
-        prec_m04 = precision_score(Preprocessing_read_csv().y_test_m_04(), y_pred_m04, average='weighted')
-        prec_m05 = precision_score(Preprocessing_read_csv().y_test_m_05(), y_pred_m05, average='weighted')
+        prec_r03 = precision_score(read_csv.y_test_r_03(), y_pred_r03, average='weighted')
+        prec_r04 = precision_score(read_csv.y_test_r_04(), y_pred_r04, average='weighted')
+        prec_r05 = precision_score(read_csv.y_test_r_05(), y_pred_r05, average='weighted')
+        prec_m03 = precision_score(read_csv.y_test_m_03(), y_pred_m03, average='weighted')
+        prec_m04 = precision_score(read_csv.y_test_m_04(), y_pred_m04, average='weighted')
+        prec_m05 = precision_score(read_csv.y_test_m_05(), y_pred_m05, average='weighted')
 
-        train_acc_r03 = accuracy_score(Preprocessing_read_csv().y_train_r_03(), y_pred_train_r03)
-        train_acc_r04 = accuracy_score(Preprocessing_read_csv().y_train_r_04(), y_pred_train_r04)
-        train_acc_r05 = accuracy_score(Preprocessing_read_csv().y_train_r_05(), y_pred_train_r05)
-        train_acc_m03 = accuracy_score(Preprocessing_read_csv().y_train_m_03(), y_pred_train_m03)
-        train_acc_m04 = accuracy_score(Preprocessing_read_csv().y_train_m_04(), y_pred_train_m04)
-        train_acc_m05 = accuracy_score(Preprocessing_read_csv().y_train_m_05(), y_pred_train_m05)
+        train_acc_r03 = accuracy_score(read_csv.y_train_r_03(), y_pred_train_r03)
+        train_acc_r04 = accuracy_score(read_csv.y_train_r_04(), y_pred_train_r04)
+        train_acc_r05 = accuracy_score(read_csv.y_train_r_05(), y_pred_train_r05)
+        train_acc_m03 = accuracy_score(read_csv.y_train_m_03(), y_pred_train_m03)
+        train_acc_m04 = accuracy_score(read_csv.y_train_m_04(), y_pred_train_m04)
+        train_acc_m05 = accuracy_score(read_csv.y_train_m_05(), y_pred_train_m05)
 
         overfitting_score_r03 = train_acc_r03 - acc_r03
         overfitting_score_r04 = train_acc_r04 - acc_r04
@@ -307,37 +284,37 @@ def testing(request):
         overfitting_score_m04 = train_acc_m04 - acc_m04
         overfitting_score_m05 = train_acc_m05 - acc_m05
 
-        acc_score_cross_val_r03 = cross_val_score(model_r03, Preprocessing_read_csv().x_train_r_03(), Preprocessing_read_csv().y_train_r_03(), cv=10, scoring='accuracy').mean()
-        prec_score_cross_val_r03 = cross_val_score(model_r03, Preprocessing_read_csv().x_train_r_03(), Preprocessing_read_csv().y_train_r_03(), cv=10, scoring='precision_weighted').mean()
-        rec_score_cross_val_r03 = cross_val_score(model_r03, Preprocessing_read_csv().x_train_r_03(), Preprocessing_read_csv().y_train_r_03(), cv=10, scoring='recall_weighted').mean()
+        acc_score_cross_val_r03 = cross_val_score(model_r03, read_csv.x_train_r_03(), read_csv.y_train_r_03(), cv=10, scoring='accuracy').mean()
+        prec_score_cross_val_r03 = cross_val_score(model_r03, read_csv.x_train_r_03(), read_csv.y_train_r_03(), cv=10, scoring='precision_weighted').mean()
+        rec_score_cross_val_r03 = cross_val_score(model_r03, read_csv.x_train_r_03(), read_csv.y_train_r_03(), cv=10, scoring='recall_weighted').mean()
 
-        acc_score_cross_val_r04 = cross_val_score(model_r04, Preprocessing_read_csv().x_train_r_04(), Preprocessing_read_csv().y_train_r_04(), cv=10, scoring='accuracy').mean()
-        prec_score_cross_val_r04 = cross_val_score(model_r04, Preprocessing_read_csv().x_train_r_04(), Preprocessing_read_csv().y_train_r_04(), cv=10, scoring='precision_weighted').mean()
-        rec_score_cross_val_r04 = cross_val_score(model_r04, Preprocessing_read_csv().x_train_r_04(), Preprocessing_read_csv().y_train_r_04(), cv=10, scoring='recall_weighted').mean()
+        acc_score_cross_val_r04 = cross_val_score(model_r04, read_csv.x_train_r_04(), read_csv.y_train_r_04(), cv=10, scoring='accuracy').mean()
+        prec_score_cross_val_r04 = cross_val_score(model_r04, read_csv.x_train_r_04(), read_csv.y_train_r_04(), cv=10, scoring='precision_weighted').mean()
+        rec_score_cross_val_r04 = cross_val_score(model_r04, read_csv.x_train_r_04(), read_csv.y_train_r_04(), cv=10, scoring='recall_weighted').mean()
 
-        acc_score_cross_val_r05 = cross_val_score(model_r05, Preprocessing_read_csv().x_train_r_05(), Preprocessing_read_csv().y_train_r_05(), cv=10, scoring='accuracy').mean()
-        prec_score_cross_val_r05 = cross_val_score(model_r05, Preprocessing_read_csv().x_train_r_05(), Preprocessing_read_csv().y_train_r_05(), cv=10, scoring='precision_weighted').mean()
-        rec_score_cross_val_r05 = cross_val_score(model_r05, Preprocessing_read_csv().x_train_r_05(), Preprocessing_read_csv().y_train_r_05(), cv=10, scoring='recall_weighted').mean()
+        acc_score_cross_val_r05 = cross_val_score(model_r05, read_csv.x_train_r_05(), read_csv.y_train_r_05(), cv=10, scoring='accuracy').mean()
+        prec_score_cross_val_r05 = cross_val_score(model_r05, read_csv.x_train_r_05(), read_csv.y_train_r_05(), cv=10, scoring='precision_weighted').mean()
+        rec_score_cross_val_r05 = cross_val_score(model_r05, read_csv.x_train_r_05(), read_csv.y_train_r_05(), cv=10, scoring='recall_weighted').mean()
 
-        acc_score_cross_val_m03 = cross_val_score(model_m03, Preprocessing_read_csv().x_train_m_03(), Preprocessing_read_csv().y_train_m_03(), cv=10, scoring='accuracy').mean()
-        prec_score_cross_val_m03 = cross_val_score(model_m03, Preprocessing_read_csv().x_train_m_03(), Preprocessing_read_csv().y_train_m_03(), cv=10, scoring='precision_weighted').mean()
-        rec_score_cross_val_m03 = cross_val_score(model_m03, Preprocessing_read_csv().x_train_m_03(), Preprocessing_read_csv().y_train_m_03(), cv=10, scoring='recall_weighted').mean()
+        acc_score_cross_val_m03 = cross_val_score(model_m03, read_csv.x_train_m_03(), read_csv.y_train_m_03(), cv=10, scoring='accuracy').mean()
+        prec_score_cross_val_m03 = cross_val_score(model_m03, read_csv.x_train_m_03(), read_csv.y_train_m_03(), cv=10, scoring='precision_weighted').mean()
+        rec_score_cross_val_m03 = cross_val_score(model_m03, read_csv.x_train_m_03(), read_csv.y_train_m_03(), cv=10, scoring='recall_weighted').mean()
 
-        acc_score_cross_val_m04 = cross_val_score(model_m04, Preprocessing_read_csv().x_train_m_04(), Preprocessing_read_csv().y_train_m_04(), cv=10, scoring='accuracy').mean()
-        prec_score_cross_val_m04 = cross_val_score(model_m04, Preprocessing_read_csv().x_train_m_04(), Preprocessing_read_csv().y_train_m_04(), cv=10, scoring='precision_weighted').mean()
-        rec_score_cross_val_m04 = cross_val_score(model_m04, Preprocessing_read_csv().x_train_m_04(), Preprocessing_read_csv().y_train_m_04(), cv=10, scoring='recall_weighted').mean()
+        acc_score_cross_val_m04 = cross_val_score(model_m04, read_csv.x_train_m_04(), read_csv.y_train_m_04(), cv=10, scoring='accuracy').mean()
+        prec_score_cross_val_m04 = cross_val_score(model_m04, read_csv.x_train_m_04(), read_csv.y_train_m_04(), cv=10, scoring='precision_weighted').mean()
+        rec_score_cross_val_m04 = cross_val_score(model_m04, read_csv.x_train_m_04(), read_csv.y_train_m_04(), cv=10, scoring='recall_weighted').mean()
 
-        acc_score_cross_val_m05 = cross_val_score(model_m05, Preprocessing_read_csv().x_train_m_05(), Preprocessing_read_csv().y_train_m_05(), cv=10, scoring='accuracy').mean()
-        prec_score_cross_val_m05 = cross_val_score(model_m05, Preprocessing_read_csv().x_train_m_05(), Preprocessing_read_csv().y_train_m_05(), cv=10, scoring='precision_weighted').mean()
-        rec_score_cross_val_m05 = cross_val_score(model_m05, Preprocessing_read_csv().x_train_m_05(), Preprocessing_read_csv().y_train_m_05(), cv=10, scoring='recall_weighted').mean()
+        acc_score_cross_val_m05 = cross_val_score(model_m05, read_csv.x_train_m_05(), read_csv.y_train_m_05(), cv=10, scoring='accuracy').mean()
+        prec_score_cross_val_m05 = cross_val_score(model_m05, read_csv.x_train_m_05(), read_csv.y_train_m_05(), cv=10, scoring='precision_weighted').mean()
+        rec_score_cross_val_m05 = cross_val_score(model_m05, read_csv.x_train_m_05(), read_csv.y_train_m_05(), cv=10, scoring='recall_weighted').mean()
 
         # Compute confusion matrices
-        cm_r03 = sk_confusion_matrix(Preprocessing_read_csv().y_test_r_03(), y_pred_r03)
-        cm_r04 = sk_confusion_matrix(Preprocessing_read_csv().y_test_r_04(), y_pred_r04)
-        cm_r05 = sk_confusion_matrix(Preprocessing_read_csv().y_test_r_05(), y_pred_r05)
-        cm_m03 = sk_confusion_matrix(Preprocessing_read_csv().y_test_m_03(), y_pred_m03)
-        cm_m04 = sk_confusion_matrix(Preprocessing_read_csv().y_test_m_04(), y_pred_m04)
-        cm_m05 = sk_confusion_matrix(Preprocessing_read_csv().y_test_m_05(), y_pred_m05)
+        cm_r03 = sk_confusion_matrix(read_csv.y_test_r_03(), y_pred_r03)
+        cm_r04 = sk_confusion_matrix(read_csv.y_test_r_04(), y_pred_r04)
+        cm_r05 = sk_confusion_matrix(read_csv.y_test_r_05(), y_pred_r05)
+        cm_m03 = sk_confusion_matrix(read_csv.y_test_m_03(), y_pred_m03)
+        cm_m04 = sk_confusion_matrix(read_csv.y_test_m_04(), y_pred_m04)
+        cm_m05 = sk_confusion_matrix(read_csv.y_test_m_05(), y_pred_m05)
         
         def plot_confusion_matrix(cm, title):
             plt.figure(figsize=(10,7))
@@ -501,8 +478,6 @@ def read_real_data(request):
         'total_data': total_data,
         'title': title
     })
-# def data_smote(request):
-#     return render(request, 'data-smote.html')
 
 @login_required(login_url='login')
 def classification(request):
@@ -585,18 +560,13 @@ def prediction(request):
 
         boron_scaled = (boron - boron_min) / (boron_max - boron_min)
         fosfor_scaled = (fosfor - fosfor_min) / (fosfor_max - fosfor_min)
-
-        # Combine the values into a single array
         data = np.array([[float(varietas), float(warna), float(rasa), float(musim), float(penyakit), float(teknik), float(ph), boron_scaled, fosfor_scaled]])
-        # data = np.array([[varietas, warna, rasa, musim, penyakit, teknik, ph, boron, fosfor]])
         model = pickle.load(open('model_m03.pkl', 'rb'))
 
         prediction = model.predict(data)
 
         # Map the prediction to class name
         prediction_class = prediction_mapping.get(prediction[0], "Unknown")
-        # prediction_class = prediction
-        # Save the result to the database
         result = ClassificationResult(
             varietas=varietas_mapping[varietas],
             warna=warna_mapping[warna],
@@ -728,9 +698,6 @@ def result(request):
 def excel(request):
     return render(request, 'excel.html')
 
-def excelCoba(request):
-    return render(request, 'excel-coba.html')
-
 @login_required(login_url='login')
 def excelPrediction(request):
     varietas_mapping = {
@@ -791,13 +758,10 @@ def excelPrediction(request):
         fs = FileSystemStorage()
         filename = fs.save(csv_file.name, csv_file)
 
-        # Read the CSV file
         df = pd.read_csv(fs.path(filename))
         
-        # Keep original values for display
         original_df = df.copy()
         
-        # Perform the mapping
         df['Varietas'] = df['Varietas'].map(varietas_mapping)
         df['Warna'] = df['Warna'].map(warna_mapping)
         df['rasa'] = df['rasa'].map(rasa_mapping)
@@ -806,10 +770,8 @@ def excelPrediction(request):
         df['PH'] = df['PH'].map(ph_mapping)
         df['teknik'] = df['teknik'].map(teknik_mapping)
 
-        # Handle possible NaN values by filling them with a default value or strategy
         df.fillna(0, inplace=True)
 
-        # Normalize boron and fosfor using Min-Max Scaler
         boron_min = 1.03
         boron_max = 7.03
         fosfor_min = 1
@@ -857,5 +819,4 @@ def download_csv(request):
             response['Content-Length'] = os.path.getsize(file_path)
             return response
     else:
-        # Jika file tidak ditemukan, bisa kembalikan respons 404
         return HttpResponse(status=404)
